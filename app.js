@@ -36,35 +36,35 @@ app.post("/",function(req,res) {
   };
   const result = scrape(options);
 
-  fs.readFile(path.join(__dirname, './json/hp_mph.json'), 'utf8', function (err, data) {
-      if (err) throw err;
-      let list = JSON.parse(data);
-      // list.forEach((item,index)=>{
-      //     let value = item.properties;
-      //     let result = {};
-      //     result.ID = index + 1;
-      //     result.TYPE = value.FLAG_A;
-      //     result.X = value.X;
-      //     result.Y = value.Y;
-      //     newList.push(result);
-      // })
-
-      for (let i = 0; i < list.length; i++) {
-          let result = {};
-          let value = list[i].properties;
-          result.ID = i + 1;
-          result.TYPE = value.FLAG_A;
-          result.X = value.X;
-          result.Y = value.Y;
-          newList.push(result);
-      }
-
-      let newContent = JSON.stringify(newList, null, 4);
-      fs.writeFile('result.json', newContent, 'utf8', (err) => {
-          if (err) throw err;
-          console.log('success done');
-      });
-  });
+  // fs.readFile(path.join(__dirname, './json/hp_mph.json'), 'utf8', function (err, data) {
+  //     if (err) throw err;
+  //     let list = JSON.parse(data);
+  //     // list.forEach((item,index)=>{
+  //     //     let value = item.properties;
+  //     //     let result = {};
+  //     //     result.ID = index + 1;
+  //     //     result.TYPE = value.FLAG_A;
+  //     //     result.X = value.X;
+  //     //     result.Y = value.Y;
+  //     //     newList.push(result);
+  //     // })
+  //
+  //     for (let i = 0; i < list.length; i++) {
+  //         let result = {};
+  //         let value = list[i].properties;
+  //         result.ID = i + 1;
+  //         result.TYPE = value.FLAG_A;
+  //         result.X = value.X;
+  //         result.Y = value.Y;
+  //         newList.push(result);
+  //     }
+  //
+  //     let newContent = JSON.stringify(newList, null, 4);
+  //     fs.writeFile('result.json', newContent, 'utf8', (err) => {
+  //         if (err) throw err;
+  //         console.log('success done');
+  //     });
+  // });
 
   res.render("list",{prevSite: "Mockup site", preSiteUrl: "/" + dateTime + "/index.html"});
 
