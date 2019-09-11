@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 
 app.get("/", function(req,res) {
-  res.render("list");
+  res.render("list",{prevSite:""});
   // res.sendFile(__dirname + "/index.html");
 
 });
