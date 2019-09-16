@@ -10,14 +10,14 @@ html, body {
   margin: auto;
   right: 0;
   left: 0;
-  width: 500px;
-  height: 500px;
+  width: 85%;
+  height: 85%;
 }
 
 .chat_container .chat {
   position: fixed;
-  width: 400px;
-  height: 400px;
+  width: 85%;
+  height: 600px;
   top: 0;
   bottom: 0;
   margin: auto;
