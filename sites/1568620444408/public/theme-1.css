@@ -1,0 +1,391 @@
+/*
+  Player Skin Designer for Video.js
+  http://videojs.com
+
+  To customize the player skin edit 
+  the CSS below. Click "details" 
+  below to add comments or questions.
+  This file uses some SCSS. Learn more  
+  at http://sass-lang.com/guide)
+
+  This designer can be linked to at:
+  http://codepen.io/heff/pen/EarCt/left/?editors=010
+*/
+.video-js {
+  /* The base font size controls the size of everything, not just text.
+     All dimensions use em-based sizes so that the scale along with the font size.
+     Try increasing it to 15px and see what happens. */
+  font-size: 10px;
+  color: #fff; /*icon font color*/
+}
+
+/*大按鈕字型*/
+@font-face {
+  font-family: 'fontello';
+  src: url('../fontello.eot');
+  src: url('../fontello.eot#iefix') format('embedded-opentype'),
+       url('../fontello.woff') format('woff'),
+       url('../fontello.ttf') format('truetype'),
+       url('fontello.svg#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*icon 大小*/
+.video-js .vjs-button { font-size:12px;}
+
+/* The default color of control backgrounds is mostly black but with a little
+   bit of blue so it can still be seen on all-black video frames, which are common. */
+.video-js .vjs-control-bar,
+.video-js .vjs-big-play-button,
+.video-js .vjs-menu-button .vjs-menu-content {
+  /* IE8 - has no alpha support */
+  background-color: #000;
+  /* Opacity: 1.0 = 100%, 0.0 = 0% */
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Slider底色 */
+.video-js .vjs-slider {
+  background-color: #595959;
+  background-color: rgba(89, 89, 89, 0.7);
+}
+
+/*進度條pogress*/
+.video-js .vjs-play-progress {
+	background-color: #ECC546;
+  	background: /*#66a8cc*/ #e3d53e url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAYAAADgzO9IAAAAP0lEQVQIHWWMAQoAIAgDR/QJ/Ub//04+w7ZICBwcOg5FZi5iBB82AGzixEglJrd4TVK5XUJpskSTEvpdFzX9AB2pGziSQcvAAAAAAElFTkSuQmCC) -50% 0 repeat
+}
+/*slider控制鈕修正位置(firefox)*/
+@-moz-document url-prefix() { 
+  .video-js .vjs-play-progress:before {
+	top: -.1em;
+	right: -.5em;
+	font-size: .9em;
+  }
+  /*slider控制鈕(hover)*/
+  .video-js .vjs-progress-control:hover .vjs-progress-holder {
+	font-size: 1.6666666667em
+  } 
+}
+
+/*fix mobile(firefox)  slider button dropdwon */
+@media screen and (max-width:550px){
+  @-moz-document url-prefix() { 
+    .video-js .vjs-play-progress:before { top: -.3em; }
+  }
+}
+
+/*hover時間軸後顯示的時間框*/
+.video-js .vjs-progress-control:hover .vjs-mouse-display:after, .video-js .vjs-progress-control:hover .vjs-play-progress:after {
+	display: block;
+	font-size: .6em
+}
+
+/*loading顏色條 */
+.video-js .vjs-load-progress {
+  /* For IE8 we'll lighten the color */
+  background: ligthen(#73859f, 25%);
+  /* Otherwise we'll rely on stacked opacities */
+  background: rgba(115, 133, 159, 0.5);
+}
+
+/* The load progress bar also has internal divs that represent
+   smaller disconnected loaded time ranges */
+.video-js .vjs-load-progress div {
+  /* For IE8 we'll lighten the color */
+  background: ligthen(#73859f, 50%);
+  /* Otherwise we'll rely on stacked opacities */
+  background: rgba(115, 133, 159, 0.75);
+}
+
+/*聲音條*/
+.video-js .vjs-volume-bar{
+  background-color: #595959;
+  background: rgba(115, 133, 159, 0.5);
+}
+/*聲音條 pogress*/
+.video-js .vjs-volume-level {
+  	background-color: #ECC546;
+  	background: /*#66a8cc*/ #e3d53e url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAYAAADgzO9IAAAAP0lEQVQIHWWMAQoAIAgDR/QJ/Ub//04+w7ZICBwcOg5FZi5iBB82AGzixEglJrd4TVK5XUJpskSTEvpdFzX9AB2pGziSQcvAAAAAAElFTkSuQmCC) -50% 0 repeat
+}
+/*聲音條位置*/
+@-moz-document url-prefix() { 
+.video-js .vjs-volume-bar {margin-top:1.2em;}
+/*.vjs-slider-vertical .vjs-volume-level:before {top:-10px;left:0}*/
+}
+
+
+/*撥放大按鈕*********************************************/
+.vjs-default-skin .vjs-big-play-button {
+  font-family: fontello;
+  font-size: 10em;
+  line-height: 2.1;
+  width: 100px;
+  height: 100px;
+  margin-left:-50px;
+  margin-top:-50px;
+  /* 0.06666em = 2px default */
+  order: 0.06666em solid #fff;
+  /* 0.3em = 9px default */
+  border-radius: 50%;
+  /* Align center */
+  left: 50%;
+  top: 50%;
+  /*box-shadow: 0 0 1em rgba(255,255,255,.25);*/
+  background-color: transparent;
+  border:none;
+  opacity:0.7;
+  transition: all 300ms 50ms;
+  transform:rotate(0deg);
+  transform-origin: 50% 50%;
+  opacity:0.7;
+  /*cursor:pointer; z-index:555;*/
+}
+
+.vjs-default-skin .vjs-big-play-button:before {
+	font-family: fontello;
+	font-weight: 400;
+	font-style: norma;
+	content: '\e802';
+	text-shadow: none;
+	position: absolute;
+	left:0; 
+	width: 100%;
+	height: 100%;
+	line-height:1.1;
+	/*transition: all 500ms;*/
+}
+/*fix chrome*/
+@media screen and (-webkit-min-device-pixel-ratio:0){
+.vjs-default-skin .vjs-big-play-button:before { line-height:1;}
+}
+
+.video-js:hover .vjs-big-play-button, .video-js .vjs-big-play-button:focus {
+	outline: 0;
+	opacity:1;
+	border-color: transparent;
+	background-color: transparent;
+	transition: all 300ms 50ms;
+	-webkit-box-shadow: 0 0 .5em -.1em #fff;
+	-moz-box-shadow: 0 0 .5em -.1em #fff;
+	box-shadow: 0 0 .5em -.1em #fff;
+	transform-origin: 50% 50%;
+	transform:rotate(360deg);
+	opacity:1; 
+}
+
+/***********************************************************************************************/
+/*首圖及play鈕設定*/
+#ima-sample-placeholder {
+  background:no-repeat center;
+  width: 100%;
+  height:100%;
+  background-size:contain;
+  position:relative;
+}
+#ima-sample-placeholder:after{ 
+  font-family: VideoJS;
+  font-weight: 400;
+  font-style: norma;
+  content:'\f102'; 
+  color:#fff;
+  position:absolute; font-size:7em; width:110px; height:110px; left:50%; top:50%; margin:-55px 0 0 -55px;
+  z-index:2; 
+  cursor:pointer; 
+  opacity:0.7;
+  transition:.3s;
+ }
+#ima-sample-placeholder:hover:after{
+	opacity:1;
+}
+
+/***********************************************************************************************/
+/*全螢幕設定(只要設定父層DIV)*/
+body{padding:0; margin:0; height:100%;}
+
+#ima-sample-videoplayer {
+    position: relative;
+    /* padding-bottom:56.25%; */
+    height: 100%;
+    overflow: hidden;
+}
+#ima-sample-videoplayer #content_video{position: fixed;
+	overflow: hidden;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	width: 100%!important;
+	height: 100%!important;
+	padding-top: 0!important
+}
+
+/*廣告全螢幕設定(只要設定父層DIV)*/
+#ima-ad-container {
+    position: relative;
+	width: 100%!important;
+    height: 100%!important;
+    overflow: hidden; 
+	
+}
+#ima-ad-container > div:first-child {
+	width: 100%!important;
+	height:100%!important;
+	padding-top: 0!important;
+}
+#ima-ad-container iframe,
+#ima-ad-container object,
+#ima-ad-container embed {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+	
+}
+#ima-controls-div{ }
+#ima-seek-bar-div{ width:100%!important;}
+
+/*外掛有對影片做自動縮放*/
+/*
+.video-container video,
+.video-container iframe,
+.video-container object,
+.video-container embed {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%!important;
+     height: 100%!important;
+}*/
+
+
+
+/*繼續觀看 end style*****************************/
+.p-button{
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom:0;
+  right:0;
+  width: 100%;
+  height: 100%;
+  margin-left:0px;
+  margin-top:0px;
+  background-color: rgba(0,0,0,.6);
+  z-index: 55;
+  transition:.5s;
+}
+.p-button:before{
+  font-family:"微軟正黑體";
+  content: '繼續觀看';
+  font-size:1.5em;
+  position: absolute;
+  width: 260px; height: 90px; line-height: 90px;
+  top: 50%; left: 50%; margin-top: -45px; margin-left: -130px;
+  border: 1px solid rgba(255,255,255,.9);
+  color:#fff;
+  text-align: center;
+}
+
+.p-button:hover {
+  background-color: rgba(0,0,0,.3);
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+
+/*繼續觀看 .endplay *****************************/
+/*用#ima-sample-placeholdere改*/
+#ima-sample-placeholder.endplay {}
+#ima-sample-placeholder.endplay:after{ 
+  font-family:"微軟正黑體";
+  font-weight: normal;
+  font-style: normal;
+  content: '繼續觀看';
+  color:#fff;
+  width: 260px; height: 90px; line-height: 90px;
+  top: 50%; left: 50%; margin-top: -45px; margin-left: -130px;
+  border: 1px solid rgba(255,255,255,.9);
+  cursor:pointer; 
+  opacity:0.7;
+  transition:.3s;
+  text-align: center;
+  font-size:1.5em;
+ }
+#ima-sample-placeholder.endplay:hover:after{
+  opacity:1;
+}
+/*繼續觀看 .endplay *****************************/
+
+
+/*play 鈕----for 直播*/
+.modal_counter{
+  position: fixed;
+  overflow: hidden;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%!important;
+  height: 100%!important;
+  padding-top: 0!important;
+  /*background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);*/
+  z-index: 99999999999;
+  display: flex;
+  align-items:center; 
+  justify-content:center;
+  background: rgba(0,0,0);
+}
+.modal_counter .blur_bg{ display: block; width: 100%; height: 100%; position: absolute; top:0; left:0; background-repeat: no-repeat;
+background-size: cover;
+filter: blur(30px);
+-webkit-filter: blur(30px);
+-moz-filter: blur(30px);
+-o-filter: blur(30px);
+-ms-filter: blur(30px);
+opacity: .8;
+transform: scale(1.1);
+}
+
+.modal_counter .inner { width: 100%; text-align: center;/*  position: absolute; top:50%; margin-top: -131px; */ display: flex; align-items:center; justify-content:center; padding:0px 10px; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; z-index: 55;}
+.modal_counter .info { width: 60%; max-width: 500px; display: inline-block; color: #fff; padding-right: 10px; }
+.modal_counter .info .time{font-size: 20px; margin-bottom: 15px; }
+.modal_counter .info .showname{ font-size: 32px; color:#fff;}
+.modal_counter .pic{ width: 40%; max-width: 500px; display: inline-block; }
+.modal_counter .pic img{width: 100%; height: auto; }
+
+
+@media (max-width:600px){
+.modal_counter .info .time{font-size: 15px;}
+.modal_counter .info .showname{ font-size:16px; }
+}
+
+
+/*倒數*/
+.modal_counter #counter_1 .no_year{ display:none;}
+.modal_counter #counter_1 .no_month{ display:none;}
+.modal_counter #counter_1 .no_week{ display:none;}
+.modal_counter #counter_1 .no_day{ display:none;}
+.modal_counter #counter_1 .no_hour{}
+.modal_counter #counter_1 .no_minute{}
+.modal_counter #counter_1 .no_second{}
+
+.modal_counter #counter_1  { color: #fff; text-align:center; font-size: 12px; padding: 5px 0px;}
+.modal_counter #counter_1  em { font-style: normal; font-size:21px; color:#fff;}
+.modal_counter #counter_1  strong { font-style: normal; font-size:12px; padding:0px 5px; color:#fff;}
+.modal_counter #counter_1  .no_hour { display: inline;  }
+.modal_counter #counter_1 .no_minute {display: inline;}
+.modal_counter #counter_1 .no_second {display: inline; }
+
+
+/*靜音鈕*/
+#btn_mute{ width: 50px; height: 50px; background: url(btn_sound-off.svg) no-repeat; background-size: 100% auto; position: absolute; bottom:35px; left:5px; z-index: 99999; transition:.5s; }
+#btn_mute.hide{opacity: 0; transform: translateY(-25px);}
+
+
+/*廣告覆蓋*/
+#ad_more{ width:100%; height:calc(100% - 85px); position:absolute; top:0; left:0; bottom:0; right:0; z-index:9999999999; }
+#ad_more a {width:100%; height:100%; display:block;}

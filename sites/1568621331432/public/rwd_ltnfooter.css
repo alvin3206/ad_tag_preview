@@ -1,0 +1,32 @@
+@charset "utf-8";
+/* CSS Document */
+ol, ul {list-style:none; margin:0; padding:0;}
+a{text-decoration:none; color:#000;}
+
+footer.ltnfooter > * { -webkit-box-sizing: border-box;  -moz-box-sizing: border-box;  box-sizing: border-box; font-family:"微軟正黑體";}
+footer.ltnfooter{ max-width:1260px; clear:both; border-top:3px solid #777; background-color:#e9e9e9; padding:20px 20px 10px;margin-top:15px; overflow:hidden;}
+footer.ltnfooter div.menu1{float: left; width: 50%;}
+footer.ltnfooter .bt {float: left; width:100%; margin-bottom:5px; height:40px;}
+footer.ltnfooter div.menu1 ul{display:block; float: left; width:100%;}
+footer.ltnfooter ul.menu2, footer.ltnfooter ul.menu3 {display:block; float: left; width: 25%; border-left:1px dotted #aaa; padding:0 0 0 25px;}
+footer.ltnfooter ul.menu3{float:right; width:24%;}
+
+footer.ltnfooter ul li a{float:left; display:inline-block; color:#111; font-size:15px; line-height:1.6rem; margin-right:15px;}
+footer.ltnfooter ul li a:hover {color: #777;}
+div.menu1 li a{font-size: 17px;}
+footer.ltnfooter ul.menu3 li:last-child a{ margin:0px;}
+
+/* --------------------Fb_d5、YT_d6 */
+footer.ltnfooter a.d5, footer.ltnfooter a.d6 {width:31px;height:31px;border-radius:20px;border:1px solid #555; background-color:#e9e9e9;transition:0.2s linear; display:inline-block; color:#555; margin:0 10px 0 0;}
+footer.ltnfooter a:hover.d5, footer.ltnfooter a:hover.d6{ color: #f7f7f7; border: 1px solid #555; background: #555;}
+/* --------------------Line */
+footer.ltnfooter a.d9 { width:32px;height:32px; border-radius:20px; border:1px solid #555; transition:0.2s linear; display:inline-block; text-decoration:none; background:url(d9_a.png) 4px 11px no-repeat #e9e9e9; background-size:23px 8px; margin:0 10px 0 0;}
+footer.ltnfooter a:hover.d9 { border:1px solid #555; background:url(d9_ahover.png) 4px 11px no-repeat #555; background-size:23px 8px;}
+
+footer.ltnfooter .copyright {clear:both; color:#555; font-size:14px; text-align:center; padding:25px 0px 0px;}
+
+@media screen and (max-width:1260px){
+    footer.ltnfooter{ }
+    footer.ltnfooter ul.menu2, footer.ltnfooter ul.menu3 { }
+    footer.ltnfooter div.menu1{ }
+}
