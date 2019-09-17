@@ -1,0 +1,16 @@
+(function(){var doc=document;var win=window;function moveContainer(){const doms=document.querySelectorAll('.gliaplayer-container')
+const frameEl=window.frameElement
+for(let i=doms.length-1;i>-1;i--){frameEl.parentNode.insertBefore(doms[i],frameEl)}
+frameEl.style.width=frameEl.style.height='1px'}
+function isInFriendlyIframe(){try{if(window.frameElement&&window.parent.document)
+return true}catch(n){return false}
+return false}
+if(isInFriendlyIframe()){moveContainer()
+doc=window.parent.document
+win=window.parent.window;}
+function loadAsync(src,doc,callback){var script=document.createElement('script');script.src=src;if(callback!==null){if(script.readyState){script.onreadystatechange=function(){if(script.readyState==="loaded"||script.readyState==="complete"){script.onreadystatechange=null;callback();}};}else{script.onload=function(){callback();};}}
+doc.getElementsByTagName('head')[0].appendChild(script);}
+var url="//player.gliacloud.com/embed/gliaplayer.js?v=0.2.27c0"
+win.gliaplayerdata=win.gliaplayerdata||[]
+loadAsync(url,doc,function(){var playerSetting=JSON.parse('{"slot": "tenmax-rss", "account": "tenmax", "playlist": null, "height": 600, "width": 800, "options": {"ad": [{"adTagXml": "", "adTagUrl": "https://pubads.g.doubleclick.net/gampad/ads?iu=/37275962/gliacloudtest&description_url=[page]&env=vp&impl=s&correlator=&tfcd=0&npa=0&gdfp_req=1&output=vast&sz=640x480&unviewed_position_start=1", "adPlacement": [1], "type": "google", "priority": 0}], "player": "GliaPlayer", "responsive": true, "autoplay": true, "loop": -1, "key_pattern": ".*"}, "id": "glia-tenmax-rss"}')
+win.gliaplayerdata.push(['init',playerSetting])});})();

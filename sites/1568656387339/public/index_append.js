@@ -69,14 +69,15 @@ document.querySelectorAll(".bubble, .ui-draggable ,.ui-draggable-handle")[0].add
   // for (var i = 0; i < gptNumber; i++) {
   if (!($( "[id*='div-gpt']" ).hasClass("gpt_highlight"))) {
     $("[id*='div-gpt']").addClass("gpt_highlight");
+    for (var i = 0 ; i < gptNumber ; i++) {
+      document.querySelectorAll("[id*='div-gpt']")[i].textContent = "DFP 廣告空間 "+ i;
+      $("#dfpDrop").append('<option value="' + i + '">' + '廣告空間 ' + i + '</option>');
+    }
+    for (var j = 0 ; j < ppsNumber ; j++) {
+      $("#ppsDrop").append('<option value="' + ppsTagList[j].crid + '">' + ppsTagList[j].name + '</option>');
+    }
   }
-  for (var i = 0 ; i < gptNumber ; i++) {
-    document.querySelectorAll("[id*='div-gpt']")[i].textContent = "DFP 廣告空間 "+ i;
-    $("#dfpDrop").append('<option value="' + i + '">' + '廣告空間 ' + i + '</option>');
-  }
-  for (var j = 0 ; j < ppsNumber ; j++) {
-    $("#ppsDrop").append('<option value="' + ppsTagList[j].crid + '">' + ppsTagList[j].name + '</option>');
-  }
+
 });
 
 
@@ -91,5 +92,7 @@ document.querySelectorAll("#confirmMapping")[0].addEventListener("click", functi
       document.querySelectorAll("[id*='div-gpt']")[dfpNoResult].innerHTML = ppsTagList[m].tag;
     }
   }
-
+  window.setTimeout(function(){
+    document.querySelectorAll(".bubble, .ui-draggable ,.ui-draggable-handle")[0].click();
+  }, 1000);
 });
