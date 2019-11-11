@@ -27,22 +27,11 @@ $(".bubble").on("click", function() {
       var ppsDropNo = document.getElementById("ppsDrop");
       var ppsNoResult = ppsDropNo.options[ppsDropNo.selectedIndex].value;
       for (var m = 0; m < ppsNumber; m++) {
-        console.log(dfpNoResult);
         if (ppsTagList[m].crid === ppsNoResult) {
-          // document.querySelectorAll("[id*='div-gpt']")[dfpNoResult].innerHTML = ppsTagList[m].tag;
-          // eval(ppsTagList[m].tag);
+          console.log(dfpNoResult,ppsNoResult,m);
 
-          // render after rom changes
-          // var speed = 10,
-          //   i = 0,
-          //   limit = 1;
-          // setTimeout(function loop() {
             document.querySelectorAll("[id*='div-gpt']")[dfpNoResult].innerHTML = ppsTagList[m].tag;
-          //   if (i <= limit) {
-          //     setTimeout(loop, speed);
-          //   }
-          // }, speed);
-          // render after rom changes
+
         }
 
 
@@ -89,7 +78,7 @@ var ppsTagList = [{
 }, {
   crid: '14431',
   name: '垂直旋轉魔術方塊',
-  tag: 'window.ppsCreatives=window.ppsCreatives||[];window.ppsCreatives.push({creativeId:"14431",layoutId:"vertical_rolling_cube",dpId:"2",targetId:"cr-14431",templateKey:"vertical-rolling-cube",version:"2",editVersion:-1,width:300,height:250,assets:[{"type":"IMAGE","key":"side2","src":"https://ads-cdn.tenmax.io/creative/2019/09/04/14431-side2.jpg?cb=1567585505869"},{"type":"IMAGE","key":"side4","src":"https://ads-cdn.tenmax.io/creative/2019/09/04/14431-side4.jpg?cb=1567585505895"},{"type":"IMAGE","key":"side3","src":"https://ads-cdn.tenmax.io/creative/2019/09/04/14431-side3.jpg?cb=1567585505882"},{"type":"OBJECT","key":"__PARAMETERS__","content":"{\"rotateDirection\":\"upSideDown\",\"rotateDelay\":\"1.5\",\"rotateSpeed\":\"0.8\",\"iconLocation\":\"rightTop\"}"},{"type":"TEXT","key":"name","content":"垂直旋轉魔術方塊_demoforeco"},{"type":"URL","key":"landingPage","content":"https://www.tenmax.io/"},{"type":"URL","key":"landingPage4","content":"https://www.tenmax.io/"},{"type":"URL","key":"landingPage3","content":"https://www.tenmax.io/"},{"type":"URL","key":"landingPage2","content":"https://www.tenmax.io/"},{"type":"VIDEO","key":"side1","src":"https://ads-media-cdn.tenmax.io/asset-0bc54310-281f-40d1-a373-38e480a0a943/8445b00.mp4?sv=2017-04-17&sr=c&si=744af0b0-59ba-41a0-986c-466ec92bf4e3&sig=258sMw8MP0Lal6nod19i0wb1qOwAwjldFcjGFBhZrn0%3D&se=2118-03-29T08%3A25%3A05Z","params":"{\"controlBar\":\"unmute-button-bottom-right\"}"}],config:{"classes":["mobile"]},customScript:"tenmax.js?cb=1568731588422",defaultAutoplay:true});(function(a,e){var d=document.createElement("ins");d.className="ppstudio";for(var r in e)d.setAttribute(r,e[r]);(a.body||a).appendChild(d);var s=document.createElement("script");s.src="https://ads-cdn.tenmax.io/code/ppstudio.js";s.async="async";document.body.appendChild(s)})(document.querySelectorAll("[id*=\'div-gpt\']")[m],{"data-pps-target-id":"cr-14431"});',
+  tag: '<div id="tenmax-pps-video-image-stacking"> <div class="tenmax-pps-ad-video-wrapper tenmax-pps-ad-video-wrapper"> <div id="tenmax-pps-ad-video"> <a href="https://tenmax.io" target="_blank" draggable="false"> <div id="tenmax-video-player" class="video_container mobile" data-rmax-widget-type="video-player"><video src="https://tenmaxsgstatic.blob.core.windows.net/ssp/tenmax%20ad.mp4" playsinline="playsinline" muted="muted"></video> <div class="jumbo-play-btn-overlay playing"> <div><span class="jumbo-play-btn"></span></div> </div> <div class="video_controls volume-off playing"> <div class="control play"> <div><span></span></div> </div> <div class="control pause"> <div><span></span></div> </div> <div class="progress-bar"> <div class="progress-fill" style="width: 19.5997%;"></div> </div> <div class="control volume"> <div><span></span></div> <div class="control volume-slider_container"><input class="volume-slider" type="range" min="0.01" max="1" step="0.01" style="background: linear-gradient(to right, currentcolor 0%, currentcolor 100%, rgb(240, 240, 240) 100%);"></div> </div> <div class="control fullscreen"> <div><span></span></div> </div> </div> <div class="unmute-btn volume-off playing"> <div class="unmute-btn-inner"> <div class="volume"> <div><span></span></div> </div> <div class="label">Tap to Unmute</div> </div> </div> </div> </a> </div> </div> <div id="tenmax-pps-ad-companion" class="companion companion"> <a href="https://tenmax.io" target="_blank" draggable="false"> <img src="https://tenmaxsgads.blob.core.windows.net/creative-sample/600x162.jpg"> </a> </div> </div><img src="//ads.tenmax.io/track/7d47d911-fee4-11e9-8aa4-5be36de24051/start?crid=video_overlay_top_full_v2-sample&amp;asset_key=video" style="display: none;"><img src="//ads.tenmax.io/track/7d47d911-fee4-11e9-8aa4-5be36de24051/visible?crid=video_overlay_top_full_v2-sample&amp;asset_key=video" style="display: none;"><img src="//ads.tenmax.io/track/7d47d911-fee4-11e9-8aa4-5be36de24051/vimpre?crid=video_overlay_top_full_v2-sample" style="display: none;"><img src="//ads.tenmax.io/track/7d47d911-fee4-11e9-8aa4-5be36de24051/visible?crid=video_overlay_top_full_v2-sample&amp;asset_key=image" style="display: none;"><img src="//ads.tenmax.io/track/7d47d911-fee4-11e9-8aa4-5be36de24051/firstQuartile?crid=video_overlay_top_full_v2-sample&amp;asset_key=video" style="display: none;"><img src="//ads.tenmax.io/track/7d47d911-fee4-11e9-8aa4-5be36de24051/midpoint?crid=video_overlay_top_full_v2-sample&amp;asset_key=video" style="display: none;"><img src="//ads.tenmax.io/track/7d47d911-fee4-11e9-8aa4-5be36de24051/thirdQuartile?crid=video_overlay_top_full_v2-sample&amp;asset_key=video" style="display: none;"><img src="//ads.tenmax.io/track/7d47d911-fee4-11e9-8aa4-5be36de24051/complete?crid=video_overlay_top_full_v2-sample&amp;asset_key=video" style="display: none;">',
 }];
 
 var ppsNumber = ppsTagList.length;

@@ -27,21 +27,20 @@ $(".bubble").on("click", function() {
       var ppsDropNo = document.getElementById("ppsDrop");
       var ppsNoResult = ppsDropNo.options[ppsDropNo.selectedIndex].value;
       for (var m = 0; m < ppsNumber; m++) {
-        console.log(dfpNoResult);
         if (ppsTagList[m].crid === ppsNoResult) {
           // document.querySelectorAll("[id*='div-gpt']")[dfpNoResult].innerHTML = ppsTagList[m].tag;
           // eval(ppsTagList[m].tag);
 
           // render after rom changes
-          // var speed = 10,
-          //   i = 0,
-          //   limit = 1;
-          // setTimeout(function loop() {
-            document.querySelectorAll("[id*='div-gpt']")[dfpNoResult].innerHTML = ppsTagList[m].tag;
-          //   if (i <= limit) {
-          //     setTimeout(loop, speed);
-          //   }
-          // }, speed);
+          var speed = 10,
+            i = 0,
+            limit = 1;
+          setTimeout(function loop() {
+            document.querySelectorAll("[id*='div-gpt']")[m].innerHTML = ppsTagList[dfpNoResult].tag;
+            if (i <= limit) {
+              setTimeout(loop, speed);
+            }
+          }, speed);
           // render after rom changes
         }
 
