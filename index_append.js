@@ -2,6 +2,8 @@ $(".bubble").draggable();
 var isMoving = false;
 var isdragging = false;
 var chatMode = false;
+var dfpAreaShow = true;
+var gptNumber = 0;
 
 function closeChat() {
   $(".bubble").css("top", "50%").css("left", "-25px").css("transition", "all 0.5s");
@@ -21,16 +23,25 @@ $(".bubble").on("click", function() {
 
     // insert by alvin
     document.querySelectorAll("#confirmMapping")[0].addEventListener("click", function() {
-      if (($("[id*='div-gpt']").hasClass("gpt_highlight"))) {
-        $("[id*='div-gpt']").removeClass("gpt_highlight");
-      }
+
+      dfpAreaShow = false;
       console.log("submit");
       var dfpDropNo = document.getElementById("dfpDrop");
       var dfpNoResult = dfpDropNo.options[dfpDropNo.selectedIndex].value;
       var ppsDropNo = document.getElementById("ppsDrop");
       var ppsNoResult = ppsDropNo.options[ppsDropNo.selectedIndex].value;
+      for (var g = 0; g < gptNumber; g++) {
+        if ($("[id*='div-gpt']").hasClass("gpt_highlight")) {
+          console.log("unhighlight");
+          $("[id*='div-gpt']:eq(" + g + ")").removeClass("gpt_highlight");
+        }
+      }
+
       for (var m = 0; m < ppsNumber; m++) {
         console.log(dfpNoResult);
+
+
+
         if (ppsTagList[m].crid === ppsNoResult) {
           // document.querySelectorAll("[id*='div-gpt']")[dfpNoResult].innerHTML = ppsTagList[m].tag;
           // eval(ppsTagList[m].tag);
@@ -40,7 +51,8 @@ $(".bubble").on("click", function() {
           //   i = 0,
           //   limit = 1;
           // setTimeout(function loop() {
-            document.querySelectorAll("[id*='div-gpt']")[dfpNoResult].innerHTML = ppsTagList[m].tag;
+          document.querySelectorAll("[id*='div-gpt']")[dfpNoResult].innerHTML = ppsTagList[m].tag;
+          $("[id*='div-gpt']:eq(" + dfpNoResult + ")").addClass("gpt_highlight");
           //   if (i <= limit) {
           //     setTimeout(loop, speed);
           //   }
@@ -51,6 +63,7 @@ $(".bubble").on("click", function() {
 
       }
       document.querySelectorAll(".bubble, .ui-draggable ,.ui-draggable-handle")[0].click();
+
     });
     // insert by alvin
   }
@@ -100,24 +113,34 @@ var ppsNumber = ppsTagList.length;
 // var gptNumber = document.querySelectorAll("[id*='div-gpt']").length;
 
 document.querySelectorAll(".bubble, .ui-draggable ,.ui-draggable-handle")[0].addEventListener("click", function() {
-  var gptNumber = document.querySelectorAll("[id*='div-gpt']").length;
+  gptNumber = document.querySelectorAll("[id*='div-gpt']").length;
   console.log(gptNumber);
   document.querySelector("span.badge").innerHTML = gptNumber;
   // document.querySelector(".message-dest").innerHTML = "DFP 廣告空間：" + gptNumber;
 
   // for (var i = 0; i < gptNumber; i++) {
-  if (!($("[id*='div-gpt']").hasClass("gpt_highlight"))) {
+  if (($("[id*='div-gpt']").hasClass("gpt_highlight")) && dfpAreaShow == false) {
+    console.log("no addClass");
+  } else if (($("[id*='div-gpt']").hasClass("gpt_highlight"))) {
+    $("[id*='div-gpt']").addClass("gpt_highlight");
+  } else {
     $("[id*='div-gpt']").addClass("gpt_highlight");
     for (var i = 0; i < gptNumber; i++) {
+      // if(document.querySelectorAll("[id*='div-gpt']")[0].textContent != "DFP 廣告空間 0")
       document.querySelectorAll("[id*='div-gpt']")[i].append("DFP 廣告空間 " + i);
+
       // document.querySelectorAll("[id*='div-gpt']")[i].textContent = "DFP 廣告空間 "+ i;
       $("#dfpDrop").append('<option value="' + i + '">' + '廣告空間 ' + i + '</option>');
     }
     for (var j = 0; j < ppsNumber; j++) {
       $("#ppsDrop").append('<option value="' + ppsTagList[j].crid + '">' + ppsTagList[j].name + '</option>');
     }
-  }
+    $("#dfpDrop option:eq(0)").attr("selected","selected");
+    $("#ppsDrop option:eq(0)").attr("selected","selected");
 
+
+  }
+  dfpAreaShow = true;
 });
 
 
