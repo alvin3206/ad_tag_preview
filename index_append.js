@@ -21,6 +21,9 @@ $(".bubble").on("click", function() {
 
     // insert by alvin
     document.querySelectorAll("#confirmMapping")[0].addEventListener("click", function() {
+      if (($("[id*='div-gpt']").hasClass("gpt_highlight"))) {
+        $("[id*='div-gpt']").removeClass("gpt_highlight");
+      }
       console.log("submit");
       var dfpDropNo = document.getElementById("dfpDrop");
       var dfpNoResult = dfpDropNo.options[dfpDropNo.selectedIndex].value;
