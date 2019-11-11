@@ -51,8 +51,14 @@ $(".bubble").on("click", function() {
           //   i = 0,
           //   limit = 1;
           // setTimeout(function loop() {
-          document.querySelectorAll("[id*='div-gpt']")[dfpNoResult].innerHTML = ppsTagList[m].tag;
+
+
+          // work!
+          eval(ppsTagList[m].tag + "google_ads_iframe_/37275962/taro_dasktop_logo右側_0__container__" + ppsTagList[m].tag_append);
+          // document.querySelectorAll("[id*='div-gpt']")[dfpNoResult].innerHTML = ppsTagList[m].tag;
           $("[id*='div-gpt']:eq(" + dfpNoResult + ")").addClass("gpt_highlight");
+
+
           //   if (i <= limit) {
           //     setTimeout(loop, speed);
           //   }
@@ -106,6 +112,11 @@ var ppsTagList = [{
   crid: '14431',
   name: '垂直旋轉魔術方塊',
   tag: 'window.ppsCreatives=window.ppsCreatives||[];window.ppsCreatives.push({creativeId:"14431",layoutId:"vertical_rolling_cube",dpId:"2",targetId:"cr-14431",templateKey:"vertical-rolling-cube",version:"2",editVersion:-1,width:300,height:250,assets:[{"type":"IMAGE","key":"side2","src":"https://ads-cdn.tenmax.io/creative/2019/09/04/14431-side2.jpg?cb=1567585505869"},{"type":"IMAGE","key":"side4","src":"https://ads-cdn.tenmax.io/creative/2019/09/04/14431-side4.jpg?cb=1567585505895"},{"type":"IMAGE","key":"side3","src":"https://ads-cdn.tenmax.io/creative/2019/09/04/14431-side3.jpg?cb=1567585505882"},{"type":"OBJECT","key":"__PARAMETERS__","content":"{\"rotateDirection\":\"upSideDown\",\"rotateDelay\":\"1.5\",\"rotateSpeed\":\"0.8\",\"iconLocation\":\"rightTop\"}"},{"type":"TEXT","key":"name","content":"垂直旋轉魔術方塊_demoforeco"},{"type":"URL","key":"landingPage","content":"https://www.tenmax.io/"},{"type":"URL","key":"landingPage4","content":"https://www.tenmax.io/"},{"type":"URL","key":"landingPage3","content":"https://www.tenmax.io/"},{"type":"URL","key":"landingPage2","content":"https://www.tenmax.io/"},{"type":"VIDEO","key":"side1","src":"https://ads-media-cdn.tenmax.io/asset-0bc54310-281f-40d1-a373-38e480a0a943/8445b00.mp4?sv=2017-04-17&sr=c&si=744af0b0-59ba-41a0-986c-466ec92bf4e3&sig=258sMw8MP0Lal6nod19i0wb1qOwAwjldFcjGFBhZrn0%3D&se=2118-03-29T08%3A25%3A05Z","params":"{\"controlBar\":\"unmute-button-bottom-right\"}"}],config:{"classes":["mobile"]},customScript:"tenmax.js?cb=1568731588422",defaultAutoplay:true});(function(a,e){var d=document.createElement("ins");d.className="ppstudio";for(var r in e)d.setAttribute(r,e[r]);(a.body||a).appendChild(d);var s=document.createElement("script");s.src="https://ads-cdn.tenmax.io/code/ppstudio.js";s.async="async";document.body.appendChild(s)})(document.querySelectorAll("[id*=\'div-gpt\']")[m],{"data-pps-target-id":"cr-14431"});',
+}, {
+  crid: '14780',
+  name: '行動直式下推 - 圖+圖',
+  tag: 'window.ppsCreatives=window.ppsCreatives||[];window.ppsCreatives.push({creativeId:"14780",layoutId:"mobile_vertical_expand_image",dpId:"2",targetId:"cr-14780",templateKey:"mobile-vertical-expand",version:"2",editVersion:-1,width:300,height:250,assets:[{"type":"IMAGE","key":"banner","src":"https://ads-cdn.tenmax.io/creative/2019/11/05/14780-banner.png?cb=1572940185976"},{"type":"IMAGE","key":"content","src":"https://ads-cdn.tenmax.io/creative/2019/11/05/14780-content.jpg?cb=1572940185989"},{"type":"OBJECT","key":"__PARAMETERS__","content":"{\"backgroundColor\":\"\",\"autoExpand\":\"on\",\"timeoutThreshold\":\"500\"}"},{"type":"TEXT","key":"name","content":"alvin test"},{"type":"URL","key":"bannerLandingPage","content":"https://tenmax.io"},{"type":"URL","key":"expandLandingPage","content":"https://tenmax.io"}],config:{"classes":["mobile"]},customScript:"tenmax.js?cb=1573469172398",defaultAutoplay:true});(function(a,e){var d=document.createElement("ins");d.className="ppstudio";for(var r in e)d.setAttribute(r,e[r]);(a.body||a).appendChild(d);var s=document.createElement("script");s.src="https://ads-cdn.tenmax.io/code/ppstudio.js";s.async="async";document.body.appendChild(s)})(document.getElementById("',
+  tag_append: '"),{"data-pps-target-id":"cr-14780"});',
 }];
 
 var ppsNumber = ppsTagList.length;
