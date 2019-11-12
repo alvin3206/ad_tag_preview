@@ -37,6 +37,7 @@ app.get("/", function(req, res) {
 app.post("/", function(req, res) {
   var site = req.body.siteUrl;
   const dateTime = Date.now();
+  console.log("/" + dateTime + "/index.html");
   const options = {
     urls: [site],
     directory: __dirname + '/sites/' + dateTime,
