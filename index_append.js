@@ -57,8 +57,8 @@ $(".bubble").on("click", function() {
           $("[id*='div-gpt']:eq(" + dfpNoResult + ") div[id*='google_ads_iframe']").html("");
           // document.querySelectorAll("[id*='div-gpt']")[dfpNoResult].innerHTML = ppsTagList[m].tag;
           $("[id*='div-gpt']:eq(" + dfpNoResult + ")").addClass("gpt_highlight");
-          eval(ppsTagList[m].tag + "google_ads_iframe_/37275962/taro_dasktop_logo右側_0__container__" + ppsTagList[m].tag_append);
-
+          var gpt_iframe = $("[id*='div-gpt']:eq(" + dfpNoResult + ") div[id*='google_ads_iframe']").attr("id");
+          eval(ppsTagList[m].tag + gpt_iframe + ppsTagList[m].tag_append);
 
 
 
