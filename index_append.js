@@ -54,10 +54,11 @@ $(".bubble").on("click", function() {
 
 
           // work!
-          eval(ppsTagList[m].tag + "google_ads_iframe_/37275962/taro_dasktop_logo右側_0__container__" + ppsTagList[m].tag_append);
+          $("[id*='div-gpt']:eq(" + dfpNoResult + ") div[id*='google_ads_iframe']").html("");
           // document.querySelectorAll("[id*='div-gpt']")[dfpNoResult].innerHTML = ppsTagList[m].tag;
-          $("[id*='div-gpt']:eq(" + dfpNoResult + ") div[id*='google_ads_iframe']").html();
           $("[id*='div-gpt']:eq(" + dfpNoResult + ")").addClass("gpt_highlight");
+          eval(ppsTagList[m].tag + "google_ads_iframe_/37275962/taro_dasktop_logo右側_0__container__" + ppsTagList[m].tag_append);
+
 
 
 
