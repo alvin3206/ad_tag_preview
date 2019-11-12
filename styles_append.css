@@ -199,6 +199,6 @@ html, body {
 
 
 .gpt_highlight {
-  outline: 5px dotted green;
+  outline: 2px dotted grey;
   display: block !important;
 }
