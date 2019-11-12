@@ -35,6 +35,7 @@ app.get("/", function(req, res) {
 });
 
 app.post("/", function(req, res) {
+  req.setTimeout(40*1000);
   var site = req.body.siteUrl;
   const dateTime = Date.now();
   console.log("/" + dateTime + "/index.html");
