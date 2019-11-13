@@ -35,7 +35,7 @@ app.get("/", function(req, res) {
 });
 
 app.post("/", function(req, res) {
-  req.setTimeout(500000);
+  // req.setTimeout(500000);
   var site = req.body.siteUrl;
   const dateTime = Date.now();
   console.log("/" + dateTime + "/index.html");
@@ -90,11 +90,18 @@ app.post("/", function(req, res) {
       if (err) throw err;
       console.log('index_append.js was copied to destination');
     });
-    res.render("list", {
-      prevSite: "Mockup site",
-      preSiteUrl: "/" + dateTime + "/index.html"
-    });
+    //work
+    // res.render("list", {
+    //   prevSite: "Mockup site",
+    //   preSiteUrl: "/" + dateTime + "/index.html"
+    // });
   });
+
+  res.render("list", {
+    prevSite: "Mockup site",
+    preSiteUrl: "/" + dateTime + "/index.html"
+  });
+
   // res.render("list",{prevSite: __dirname + "/site/" + dateTime + "/index.html", preSiteUrl: "/" + dateTime + "/index.html"});
 });
 
