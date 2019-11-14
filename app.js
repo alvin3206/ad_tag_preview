@@ -49,53 +49,62 @@ app.post("/", function(req, res) {
   };
   // const result = scrape(options);
   console.log("post");
-  scrape(options).then((result) => {
-    var styleResult;
-    var linkResult;
-    console.log("scrape");
-    fs.readFile(__dirname + '/sites/' + dateTime + '/index.html', 'utf8', function(err, data) {
-      if (err) {
-        return console.log(err);
-      }
-      console.log("process1");
 
-      styleResult = data.replace('</body>', bubbleStyleString);
-      styleResult = styleResult.replace('</head>', bubbleOutLink);
-      // var htmlResult = data.replace('<body>', bubbleHtml);
-      fs.writeFile(__dirname + '/sites/' + dateTime + '/index.html', styleResult, 'utf8', function(err) {
-        if (err) return console.log(err);
-        console.log("process2");
-        // fs.writeFile(__dirname + '/sites/'+ dateTime + '/index.html', htmlResult, 'utf8', function (err) {
-        //    if (err) return console.log(err);
-        //    console.log("process2");
-        // });
-        // fs.writeFile(__dirname + '/sites/'+ dateTime + '/index.html', linkResult, 'utf8', function (err) {
-        //   if (err) return console.log(err);
-        //   console.log("process2");
-        //
-        // });
+
+
+    scrape(options).then((result) => {
+      var styleResult;
+      var linkResult;
+      console.log("scrape");
+      if (req.body.notBubble == false) {
+      fs.readFile(__dirname + '/sites/' + dateTime + '/index.html', 'utf8', function(err, data) {
+        if (err) {
+          return console.log(err);
+        }
+        console.log("process1");
+
+        styleResult = data.replace('</body>', bubbleStyleString);
+        styleResult = styleResult.replace('</head>', bubbleOutLink);
+        // var htmlResult = data.replace('<body>', bubbleHtml);
+        fs.writeFile(__dirname + '/sites/' + dateTime + '/index.html', styleResult, 'utf8', function(err) {
+          if (err) return console.log(err);
+          console.log("process2");
+          // fs.writeFile(__dirname + '/sites/'+ dateTime + '/index.html', htmlResult, 'utf8', function (err) {
+          //    if (err) return console.log(err);
+          //    console.log("process2");
+          // });
+          // fs.writeFile(__dirname + '/sites/'+ dateTime + '/index.html', linkResult, 'utf8', function (err) {
+          //   if (err) return console.log(err);
+          //   console.log("process2");
+          //
+          // });
+        });
       });
+
+      // fs.writeFileSync(__dirname + '/sites/' + dateTime + '/index.html', linkResult, 'utf8', function(err) {
+      //   if (err) return console.log(err);
+      //   console.log("process2");
+      //
+      // });
+      fs.copyFile(__dirname + '/styles_append.css', __dirname + '/sites/' + dateTime + '/public/' + 'styles_append.css', (err) => {
+        if (err) throw err;
+        console.log('styles_append.css was copied to destination');
+      });
+      fs.copyFile(__dirname + '/index_append.js', __dirname + '/sites/' + dateTime + '/public/' + 'index_append.js', (err) => {
+        if (err) throw err;
+        console.log('index_append.js was copied to destination');
+      });
+      //work
+      // res.render("list", {
+      //   prevSite: "Mockup site",
+      //   preSiteUrl: "/" + dateTime + "/index.html"
+      // });
+      }
+      
     });
 
-    // fs.writeFileSync(__dirname + '/sites/' + dateTime + '/index.html', linkResult, 'utf8', function(err) {
-    //   if (err) return console.log(err);
-    //   console.log("process2");
-    //
-    // });
-    fs.copyFile(__dirname + '/styles_append.css', __dirname + '/sites/' + dateTime + '/public/' + 'styles_append.css', (err) => {
-      if (err) throw err;
-      console.log('styles_append.css was copied to destination');
-    });
-    fs.copyFile(__dirname + '/index_append.js', __dirname + '/sites/' + dateTime + '/public/' + 'index_append.js', (err) => {
-      if (err) throw err;
-      console.log('index_append.js was copied to destination');
-    });
-    //work
-    // res.render("list", {
-    //   prevSite: "Mockup site",
-    //   preSiteUrl: "/" + dateTime + "/index.html"
-    // });
-  });
+
+
 
   res.render("list", {
     prevSite: "Mockup site",

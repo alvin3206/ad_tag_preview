@@ -10,10 +10,13 @@
         <h1 class="h3 mb-3 font-weight-normal">Website scraper</h1>
         <label for="inputEmail" class="sr-only">輸入網址</label>
         <textarea type="email" id="inputEmail" class="form-control" name="siteUrl" pattern="https://.*" placeholder="Url" required="" autofocus=""></textarea>
+
         <div class="checkbox mb-3">
+          <input type="checkbox" class="form-check-input" id="onlyScrapeCheck" name="notBubble">
+          <label class="form-check-label" for="onlyScrapeCheck">onlyScrape</label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">開始下載</button>
-        <a class="btn btn-lg btn-success btn-block" target="_blank"  href="<%= preSiteUrl %>"><%= prevSite %></a>
+        <a class="btn btn-lg btn-success btn-block" target="_blank" href="<%= preSiteUrl %>"><%= prevSite %></a>
         <p class="mt-5 mb-3 text-muted">© 2019</p>
       </form>
     </div>
