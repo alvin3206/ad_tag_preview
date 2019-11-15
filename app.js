@@ -52,11 +52,12 @@ app.post("/", function(req, res) {
 
 
 
-    scrape(options).then((result) => {
-      var styleResult;
-      var linkResult;
-      console.log("scrape");
-      if (req.body.notBubble == false) {
+  scrape(options).then((result) => {
+    var styleResult;
+    var linkResult;
+    console.log("scrape");
+    console.log(req.body.notBubble);
+    if (req.body.notBubble !== true) {
       fs.readFile(__dirname + '/sites/' + dateTime + '/index.html', 'utf8', function(err, data) {
         if (err) {
           return console.log(err);
@@ -99,9 +100,9 @@ app.post("/", function(req, res) {
       //   prevSite: "Mockup site",
       //   preSiteUrl: "/" + dateTime + "/index.html"
       // });
-      }
-      
-    });
+    }
+
+  });
 
 
 
