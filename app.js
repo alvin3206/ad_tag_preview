@@ -26,8 +26,9 @@ app.use(bodyParser.urlencoded({
 app.get("/", function(req, res) {
   // 避免空白
   res.render("list", {
-    prevSite: "",
-    preSiteUrl: ""
+    prevSite: "Mockup site",
+    preSiteUrl: "",
+    disabled:"disabled"
   });
   // res.sendFile(__dirname + "/index.html");
   // console.log(__dirname);
@@ -109,7 +110,8 @@ app.post("/", function(req, res) {
 
   res.render("list", {
     prevSite: "Mockup site",
-    preSiteUrl: "/" + dateTime + "/index.html"
+    preSiteUrl: "/" + dateTime + "/index.html",
+    disabled:""
   });
 
   // res.render("list",{prevSite: __dirname + "/site/" + dateTime + "/index.html", preSiteUrl: "/" + dateTime + "/index.html"});
