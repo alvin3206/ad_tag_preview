@@ -1,2 +1,4 @@
-sites/
-!/public/
+!sites/
+
+sites/*
+!sites/public/
