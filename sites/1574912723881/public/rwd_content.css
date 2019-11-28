@@ -1,0 +1,173 @@
+@charset "utf-8";
+/* CSS Document */
+@media screen and (max-width:1260px) {
+	.content { padding:0 1.5%; }
+	section.content940 { max-width:none; width:calc(100% - 300px - 20px); }
+}
+@media screen and (min-width:1101px) {
+    .searchbox div:first-child { max-width:726px; margin:0 auto; }
+    .searchbox div input[type="text"] { width:calc(100% - 417px); }
+    .searchbox .interval { max-width:738px; margin:0 auto; }
+    .searchbox .interval p { margin-top:10px; }
+    .searchbox .interval input.datepicker { width:calc(51% - 24px); height:30px; font-size:18px; padding:0 5px; border:1px solid #a9a9a9; }
+    .ui-widget-content { box-shadow: 0px 0px 5px rgba(0,0,0,0.7)!important;  }
+}
+@media screen and (max-width:1100px) {
+	article { width:98%; }
+	aside { display:none; }
+	section.content940 { width:100%; float:none; margin:0 auto; }
+	.searchbox { display:none; }
+	.whitecon { float:none; margin:0px auto 30px; overflow:hidden; }
+}
+@media screen and (max-width:960px) {
+    #ad-K1 { margin-bottom:10px; }
+	.content { padding:0; margin:0 auto; }
+	.breadcrumbs, .searchbox, .related { width:96%; margin:0px auto; }
+	.caption, .labelA { width:96%; margin:10px auto 10px; }
+	.whitecon { width:96%; }
+	.see_more{ width:96%; margin:20px auto 0; }
+    .evt_m { width:96%; margin:0 auto; }
+	/* 服務頁 */
+	.infoMain { padding:40px; }
+	.abutton a.btn1, .abutton a.btn2{margin:20px 15px 10px;}
+	.PForm{ width:100%;font-size:16px;}
+	/* 404 */
+	.fault404 iframe { display:none; }
+	/* 專區 */
+	.proj { padding:20px 15px; }
+	.project { padding:0 15px; }
+}
+@media screen and (max-width:828px) {
+    .caption, .labelA b { font-size:27px; }
+}
+@media screen and (min-width:801px) {
+    .newsSort2_m { display:none; }
+}
+@media screen and (max-width:800px) {
+	.project a { flex:0 0 48%; }
+    .newsSort2 { display:none; }
+/* 地方新聞下拉選單 */
+    .newsSort2_m { width:100%; background:#dbe0e2; }
+    .newsSort2_m li { text-align:center; width: 100%; padding: 14px 0;}
+    .newsSort2_m li.local select { width:50%; height:30px; font-size:16px; font-family:"黑體", "微軟正黑體", "新細明體", Arial, sans-serif; border:1px solid #999; background: url(arrow_1.png) no-repeat right center #fff; background-size:1rem; padding:0px 10px; -webkit-appearance:none; /*Chrome*/ -moz-appearance:none; /*FF*/ appearance:none;/*CSS3*/  }
+    .newsSort2_m li.local select::-ms-expand, .paperEnd form select::-ms-expand { display:none; /*IE*/ }
+}
+@media screen and (max-width:700px) {
+	.breadcrumbs{line-height:40px;}
+    #ad-C1 { margin-bottom:15px;}
+	/* 服務頁 */
+	.infoMain { padding:20px; }
+	.abutton a.btn1, .abutton a.btn2{margin:20px 5px 10px;min-width:240px;}
+	.abutton a.btn1, .abutton a.btn2{font-size:19px;}
+	.ltnrss{ width:100%; font-size:16px;}
+	/* 404 */
+	.fault404 { padding: 25px 15px; position:relative; }
+	.fault404 .info { width:auto; margin: 0 auto; }
+	.fault404 img { clear:left; margin-right:0px; position:absolute; left:50%; transform:translateX(-50%); }
+	.fault404 .txt { clear:left; margin-top:150px; }
+}
+@media screen and (max-width:600px) {
+	body { background-color:#eee; }
+	.content { width:100%; padding:0;}
+	article { width:96%; }
+	.suggest { display:none; }
+    .evt_m { width:100%; }
+    .waitAjax img { width:auto; margin:0 0 15px;}
+	/*頁數*/
+	.pagination a:not(.active) { display:none; }
+	.pagination a.active { margin:0 10px; }
+	.pagination a.p_prev, .pagination a.p_next, .pagination a.p_first, .pagination a.p_last { display:block; border:1px solid #aaa; margin:0 10px; }/*《〈〉》*/
+	.pagination span.p_prev, .pagination span.p_next, .pagination span.p_first, .pagination span.p_last { display:block; background-color:#f2f2f2; margin:0 10px; }
+	/*內容*/
+	.whitecon { width:100%; box-shadow:none; margin:0px; }
+	.whitecon ul.list { padding:15px 15px 0px; }
+	.whitecon ul.list li { margin:0px 0px 15px; padding:0px 0px 15px; }
+	.whitecon .text { width:100%; padding:0 15px 15px 15px; }
+	.whitecon h1 { width:100%; padding:0px 15px 12px; border-bottom:1px solid #c2c2c2; margin:15px auto 0px; }
+	.whitecon .function { width:100%; padding:0px 15px; margin:20px auto 5px; }
+	.whitecon .function a.print { display:none; }
+	.whitecon .function a.fontsize { float:none; }
+	.related a { flex:0 0 100%; padding:10px; margin:0 0 10px; }
+    .related a span { padding-left: 10px; }
+	.related a p{padding:3px 0px 0px 10px;}
+	ul.todaynews { padding:0px 15px; }
+	ul.todaynews li { width:100%; padding:12px 0px;}
+	/* 專區 */
+	.project a p { width:calc(100% - 65px); font-size:17px; padding:10px 0 0; }
+	.project a span.year { margin:10px 15px 0px 0px; }
+	.project a span.year:after { width:45px; }
+	.project a span.month { font-size:30px; }
+	.proj_page span.p_prev, .proj_page span.p_next, .proj_page span.p_first, .proj_page span.p_last { background-color: #cdcdcd; }
+	.subproject a p { width:100%; }
+}
+@media screen and (max-width:500px) {
+	.searchbox { display:none; }
+	.caption, .labelA { width:auto; padding:0px 0px 5px; margin:5px 15px 10px 15px; font-size:24px; position:relative; }
+    .labelA b { font-size:24px; }
+	.caption:before, .labelA:before { content:""; display:inline-block; width:30%; height:0; border-top:3px solid #ffc000; position:absolute; bottom:0; left:0; }
+	.caption:after, .labelA:after { content:""; display:inline-block; width:70%; height:0; border-top:3px solid #aaa; position:absolute; bottom:0; right:0; }
+	.caption span { font-size:18px; }
+	ul.list li a.tit { width:60%; padding:0px 10px; }
+	ul.list li a.ph { width:40%; height:0; padding:0 0 26% 0; overflow:hidden; }
+	/*關鍵字搜尋結果*/
+	ul.searchlist { padding:15px 15px 0px; }
+	ul.searchlist li { margin:0px 0px 10px; padding:0px 0px 10px; min-height:initial; }
+	ul.searchlist li p { display:none; }
+	.see_more a { flex:0 0 100%;}
+	.see_more a p:before { display:none; }
+    .searchlist #ad-B1, .searchlist #ad-B2, .searchlist #ad-B3, .searchlist #ad-B4 { margin: 0px auto 10px; padding: 0px 0px 10px; }
+	/* 服務頁 */
+	.infoMain ul li p{padding-left:0;}
+    .infoMain a{padding-bottom:0; border-bottom:none;}
+	.detail{ width:100%; padding:15px;}
+	.detail ul li{line-height:1.3; margin:15px 0;}
+	.abutton{ width:80%; }
+	.abutton a.btn1, .abutton a.btn2{ margin:10px; }
+	.PForm{ width:100%;font-size:16px;}
+	.PForm input[type="text"]{ width:90%;}
+	.PForm .btn_a{ font-size:16px; padding:5px 15px 5px 20px;}
+	.PForm input[name="ODY"] {width:45%;}
+	.PForm select[name="ODM"] {width:45%;margin:0;}
+	.ltnrss th, .ltnrss td{width:30%; font-size:13px;}
+    .ltnrss td.xml {width:70%; background:none; padding:0 0 0 10px;}
+	.ltnrss td.xml a{ font-size:12px; }
+	.infoMain a{ word-break:break-word; }
+}
+@media screen and (max-width:420px) {
+	.fault404 h3 { font-size:25px; padding-bottom:10px; }
+	.fault404 p { font-size:18px; line-height:35px; }
+	.fault404 p a { font-size:18px; }
+	/* 專區 */
+	.project a { margin-bottom: 25px; flex:0 0 100%; }
+	.project a p { font-size:20px; line-height: 1.3; padding: 8px 0 0; }
+	.proj_page { margin:10px auto 40px; }
+}
+@media screen and (max-width:380px) {
+    /* 服務頁 */
+    .ltnrss th, .ltnrss td{width:25%; font-size:13px;}
+    .ltnrss td.xml {width:75%; background:none; padding:0;}
+	.ltnrss td.xml a{ font-size:12px; }
+	/* 專區 */
+	.proj a { margin-right: 15px; }
+}
+@media screen and (max-width:320px) {
+	/* 服務頁 */
+	.abutton a.btn1, .abutton a.btn2{ margin:10px; min-width:200px;}
+}
+
+/* 重要專題 */
+@media screen and (max-width:400px) {
+	.evt { margin-bottom:15px; }
+}
+
+/******************** 廣告切換電腦版手機版 ********************/
+@media screen and (min-width:701px) {
+    .ad.m {display: none;}
+    .ad.m.both { display: block; }
+}
+@media screen and (max-width:700px) {
+    .ad.pc {display: none;}
+    .ad.pc.both { display: block; }
+    .ad.m > div {margin: 0 auto;}
+}
+
