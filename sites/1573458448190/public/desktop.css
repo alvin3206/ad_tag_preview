@@ -1,0 +1,93 @@
+/* CSS Document */
+html,body
+{
+	padding: 0;
+	margin: 0;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+html,body
+{
+	font-family: "microsoft yahei";
+}
+
+iframe {
+   max-width: 100% !important;
+}
+
+#dirnum{
+	font-size:16px;color:#464646;padding-right:15px;padding-left:5px !important;
+}
+
+.wycamefrom
+{
+	color:#464646;
+	text-align:left;
+	font-size:13px;
+	padding-top:8px;
+}
+
+.smplifymycode
+{
+	color:#cd2026 !important;
+	border-bottom: 1px solid #cd2026;
+}
+
+#mthuati a, #mthuati a:hover
+{
+	color:#cd2026;
+}
+
+#m-menu-container2
+{
+	height: auto;
+	width: 100%;
+	overflow: hidden;
+	position: relative;
+	white-space:nowrap;
+	background-color:#e2e2e2;
+	font-size:15px;
+}
+
+.m-menu-son2
+{
+	position:relative;
+	display:inline-block;
+	padding:5px 5px 5px 5px;
+	color:black;
+}
+
+.m-menu-son2 a, .m-menu-son2 a:hover
+{
+	color:black;
+	text-decoration:none;
+}
+
+.neiwen_time_title h3
+{
+	color: black;
+	font-weight: bold;
+}
+
+.ps--active-x > .ps__rail-x, .ps--active-y > .ps__rail-y 
+{
+	display:none !important;
+}
+
+#articlenum img
+{
+	max-width:100%;
+	height:auto !important;
+}
+
+.pc2bar a, .pc2bar a:hover
+{
+	color:#cd2026 !important;
+}
+
+figcaption
+{
+	width:auto;
+	max-width:90%;
+	padding-bottom:8px !important;
+}

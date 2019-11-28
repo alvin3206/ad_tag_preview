@@ -1,0 +1,95 @@
+#clicknum, #sharenum, #disnum
+{
+	display: inline-block;
+	padding-left: 5px;
+	padding-right: 5px;
+	font-size: 12px;
+	vertical-align: middle;
+}
+
+#clicknum span
+{
+	color: grey;
+}
+
+articleID
+{
+	display: none;
+}
+
+#disnum span
+{
+	color: #cd2026;
+}
+
+.userMessage
+{
+	width: 85% !important;
+	display: inline-block !important;
+}
+
+body
+{
+	padding: 0px !important;
+	overflow-x: hidden !important;
+}
+
+.publicDiv #public
+{
+	border-radius: 5% !important;
+	height: 40px !important;
+	vertical-align: middle !important;
+	padding-top: 0 !important;
+	background-color: #CE2127 !important;
+}
+
+#defaultTitle
+{
+	display:none !important;
+}
+
+.hot_title
+{
+	color: #CE2127 !important;
+}
+
+.name
+{
+	color:black !important;
+}
+
+.textarea, .textareaInput 
+{
+	border: none !important;
+	outline: none !important;
+	background-color: #f0f0f0;
+	height: 130px !important;
+}
+
+.pC
+{
+	border: none !important;
+}
+
+.user-login 
+{
+	color: #CE2127 !important;
+	border: 1px solid #CE2127 !important;
+}
+
+.headicon
+{
+	width:42px !important;
+}
+
+.daohang
+{
+	text-align:left;
+	font-size:15px;
+}
+
+.daohang a, .daohang a:hover
+{
+	text-decoration:none;
+	color:black;
+}
