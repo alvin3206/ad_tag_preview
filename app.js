@@ -10,6 +10,7 @@ const app = express();
 const bubbleOutLink = '<link rel="stylesheet" href="public/styles_append.css"></head><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script><script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>';
 const bubbleStyleString = '<div class="chat_container" style="visibility:hidden;z-index:100000">  <div class="bubble" style="visibility:visible"></div>  <div class="chat" style="visibility:visible">    <ul class="chat-thread">      <li><button type="button" class="btn btn-primary">          頁面上的 DFP 廣告空間數          <span class="badge badge-light">9</span>          <span class="sr-only">unread messages</span>        </button></li>      <li><p>DFP空間</p><select id="dfpDrop">     <!-- <option value="" selected disabled hidden>Choose DFP space</option> -->        </select></li>   <li><p>PPS版型：</p><select id="ppsDrop">     <!-- <option value="" selected disabled hidden>Choose PPS Layout</option> -->        </select></li>    <li><button id="confirmMapping" type="button" class="btn btn-primary">顯示</button></li>     </ul>  </div></div></body>><script src="public/index_append.js" charset="utf-8"></script>';
 const topTag = '<script id="pps-script-11999" data-width="320" data-height="50" data-click-url="" data-cache-buster="" data-dsp-script="" src="https://tenmaxsgads.blob.core.windows.net/holder-stage/11999_ccb471cd-a98c-3262-8af0-4af97aec476d.js?cb=1574909888873"></script><ins class="ppstudio" data-pps-target-id="cr-11999"></ins><script async src="https://tenmaxsgads.blob.core.windows.net/code-stage/ppstudio-dev.js"></script>';
+const googleConsoleMeta = '<meta name="google-site-verification" content="_KVbcXSdDrOFWWY0t6EqNWwLUX5E0S9imEIhCenUZYE"/></head>'
 
 // const bubbleStyleString = '<div class="chat_container" style="z-index:2147483647;"><div class="bubble"></div> <div class="chat"> <ul class="chat-thread"><button type="button" class="btn btn-primary">頁面上的 DFP 廣告空間數<span class="badge badge-light">9</span> <span class="sr-only">unread messages</span></button><li class="message-dest">Hi Codepen!</li> <li class="message-dest"><select class="custom-select"><option selected>DFP 廣告空間</option></select> </li> <li class="message-mit"></li></ul> </div> <div></body><script src="public/index_append.js" charset="utf-8"></script>';
 
@@ -67,6 +68,7 @@ app.post("/", function(req, res) {
         console.log("process1");
 
         styleResult = data.replace('</body>', bubbleStyleString);
+        styleResult = styleResult.replace('</head>', googleConsoleMeta);
         styleResult = styleResult.replace('</head>', bubbleOutLink);
         // var htmlResult = data.replace('<body>', bubbleHtml);
         fs.writeFile(__dirname + '/sites/' + dateTime + '/index.html', styleResult, 'utf8', function(err) {
