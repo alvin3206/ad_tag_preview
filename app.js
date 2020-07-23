@@ -88,13 +88,13 @@ app.post("/", function(req, res) {
         if (err) throw err;
         console.log('append.html was copied to destination');
       });
-    }
-
-    if (req.body.codeFormat === "js"){
       fs.copyFile(__dirname + '/index_append.js', __dirname + '/sites/' + dateTime + '/public/' + 'index_append.js', (err) => {
         if (err) throw err;
         console.log('index_append.js was copied to destination');
       });
+    }
+
+    if (req.body.codeFormat === "js"){
       fs.readFile(__dirname + '/sites/' + dateTime + '/public/' + 'append.html', 'utf8', function(err, data) {
         if (err) {
           return console.log(err);
@@ -109,7 +109,19 @@ app.post("/", function(req, res) {
         });
       });
     } else if (req.body.codeFormat === "html"){
+      fs.readFile(__dirname + '/sites/' + dateTime + '/public/' + 'append.html', 'utf8', function(err, data) {
+        if (err) {
+          return console.log(err);
+        }
+        console.log("process3");
 
+        jsReplace = data.replace('<body>', '<body>' + decodeURI(adTag));
+
+        fs.writeFile(__dirname + '/sites/' + dateTime + '/public/' + 'append.html', jsReplace, 'utf8', function(err) {
+          if (err) return console.log(err);
+          console.log("process4");
+        });
+      });
     }
 
 
