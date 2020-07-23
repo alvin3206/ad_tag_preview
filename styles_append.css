@@ -3,6 +3,11 @@ html, body {
   margin: 0;
 }
 
+iframe.adFrame {
+  border: 20px;
+
+}
+
 .chat_container {
   position: fixed;
   top: 0;

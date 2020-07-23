@@ -4,37 +4,53 @@
 <div class="container">
   <div class="mt-2">
   </div>
-  <div class="row align-items-center">
-    <div class="col-md-6 col-lg-4 col-sm-8 justify-content-md-center offset-md-3 offset-lg-4 offset-sm-2">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10 col-sm-12">
       <form class="" action="/" method="post" style="">
-        <img src="public/images/logo_transparent.png" class="img-fluid" alt="logo">
-        <!-- <h1 class="h3 mb-3 font-weight-normal text-center">Website scraper</h1> -->
-        <div class="form-group shadow rounded-pill">
-          <label for="inputEmail" class="sr-only">輸入網址</label>
-          <input type="text" id="inputEmail" class="form-control border-0 rounded-pill form-control-lg" name="siteUrl" pattern="https://.*" placeholder="Url" required="" autofocus=""></input>
+        <div class="row justify-content-center">
+          <div class="col-6 text-center">
+            <img src="public/images/logo_alter.png" class="img-fluid" alt="Ad Tag Previewer">
+          </div>
         </div>
-        <div class="form-group form-check m-2">
-          <input type="checkbox" class="form-check-input" id="onlyScrapeCheck" name="notBubble" value="true">
-          <label class="form-check-label text-secondary" for="onlyScrapeCheck">不添加 DFP Selector</label>
+        <div class="form-group">
+          <label for="inputUrl">Preview tag on</label>
+          <input type="text" id="inputUrl" class="form-control border-0 rounded-pill shadow disableLink" name="siteUrl" pattern="https://.*" placeholder="https://..." required="" autofocus=""></input>
         </div>
-        <div class="form-group form-check m-2">
-          <input type="checkbox" class="form-check-input" id="insertTopCheck" name="onTop" value="true">
-          <label class="form-check-label text-secondary" for="insertTopCheck">添加置頂版型</label>
+
+        <div class="form-group my-4">
+          <label for="adTag">Your tag</label>
+          <textarea class="form-control shadow border-0 rounded-lg disableLink" id="insertTag" name="insertTag"rows="5" cols="10" required=""></textarea>
+          <!-- <textarea class="form-control shadow border-0 rounded-lg" id="insertTag" name="insertTag"rows="5" cols="10" placeholder="html elements with no script tag:&#060;div>...&#x0aOr pure javascript" required=""></textarea> -->
         </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input disableLink" type="radio" name="codeFormat" id="htmlOption" value="html" checked>
+          <label class="form-check-label optional" for="htmlOption">
+            html tag (with no script)
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input disableLink" type="radio" name="codeFormat" id="jsOption" value="js">
+          <label class="form-check-label optional" for="jsOption">
+            Javascript
+          </label>
+        </div>
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="disableSelectOption" name="disableSelect" value="true">
+          <label class="align-text-top form-check-label text-secondary optional" for="disableSelect">Disabled Ad Space Selector</label>
+        </div>
+
         <div class="d-flex flex-row">
-          <button class="btn btn-primary flex-fill m-1" type="submit">開始下載</button>
-          <a class="btn btn-success flex-fill m-1 <%= disabled %>" target="_blank" href="<%= preSiteUrl %>"> <%= prevSite %> </a>
+          <button class="btn btn-primary flex-fill m-1" type="submit">Start</button>
+          <a class="btn btn-success flex-fill m-1 <%= disabled %>" target="_blank" href="<%= preSiteUrl %>?format=<% format %>"> <%= prevSite %> </a>
         </div>
 
       </form>
     </div>
   </div>
 
-  <div class="" style="height:100px">
-  </div>
-
-  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong>免責聲明</strong><br>當點擊"開始下載按鈕"，表示您同意使用條款：此網站僅用於示意 PPStudio 廣告用途，不得作為其他用途，亦不得輸入非貴公司之網址，若造成他人損傷，請自行負責。
+  <div class="alert alert-warning alert-dismissible fade show fixed-bottom mb-0 sticky-alert" role="alert">
+    <!-- <strong>免責聲明</strong><br>當點擊"開始下載"按鈕，表示您同意使用條款：此網站僅用於示意廣告用途，不得作為其他用途，亦不得輸入非貴公司之網址，若造成他人損傷，請自行負責。 -->
+    <strong>Disclaimer</strong><br>When you click the "Start" button, you agree to the terms of use: This website is only for illustrative purposes, not for commercial or other purposes, and you must not enter a website that is not under your company. If you cause damage to others, please be responsible for it.
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>

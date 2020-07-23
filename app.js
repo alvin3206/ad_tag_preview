@@ -8,9 +8,11 @@ const fs = require('fs');
 
 const app = express();
 const bubbleOutLink = '<link rel="stylesheet" href="public/styles_append.css"></head><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script><script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>';
-const bubbleStyleString = '<div class="chat_container" style="visibility:hidden;z-index:100000">  <div class="bubble" style="visibility:visible"></div>  <div class="chat" style="visibility:visible">    <ul class="chat-thread">      <li><button type="button" class="btn btn-primary">          頁面上的 DFP 廣告空間數          <span class="badge badge-light">9</span>          <span class="sr-only">unread messages</span>        </button></li>      <li><p>DFP空間</p><select id="dfpDrop">     <!-- <option value="" selected disabled hidden>Choose DFP space</option> -->        </select></li>   <li><p>PPS版型：</p><select id="ppsDrop">     <!-- <option value="" selected disabled hidden>Choose PPS Layout</option> -->        </select></li>    <li><button id="confirmMapping" type="button" class="btn btn-primary">顯示</button></li>     </ul>  </div></div></body>><script src="public/index_append.js" charset="utf-8"></script>';
-const topTag = '<script id="pps-script-11999" data-width="320" data-height="50" data-click-url="" data-cache-buster="" data-dsp-script="" src="https://tenmaxsgads.blob.core.windows.net/holder-stage/11999_ccb471cd-a98c-3262-8af0-4af97aec476d.js?cb=1574909888873"></script><ins class="ppstudio" data-pps-target-id="cr-11999"></ins><script async src="https://tenmaxsgads.blob.core.windows.net/code-stage/ppstudio-dev.js"></script>';
-const googleConsoleMeta = '<meta name="google-site-verification" content="_KVbcXSdDrOFWWY0t6EqNWwLUX5E0S9imEIhCenUZYE"/></head>'
+const bubbleStyleString = '<div class="chat_container" style="visibility:hidden;z-index:100000">  <div class="bubble" style="visibility:visible"></div>  <div class="chat" style="visibility:visible">    <ul class="chat-thread">      <li><h5>          How many DFP Ad spaces on this page:          <span class="badge badge-pill badge-warning">9</span>        </h5></li>      <li><p>Replace DFP ad space:</p><select id="dfpDrop">     <!-- <option value="" selected disabled hidden>Choose DFP space</option> -->        </select></li><li><p>Ad Space Size</p><p id="spaceSize"></p></li>    <li><button id="confirmMapping" type="button" class="btn btn-primary">Replace with your tag</button></li>     </ul>  </div></div></body>><script src="public/index_append.js" charset="utf-8"></script>';
+// const bubbleStyleString = '<div class="chat_container" style="visibility:hidden;z-index:100000">  <div class="bubble" style="visibility:visible"></div>  <div class="chat" style="visibility:visible">    <ul class="chat-thread">      <li><button type="button" class="btn btn-primary">          頁面上的 DFP 廣告空間數          <span class="badge badge-light">9</span>          <span class="sr-only">unread messages</span>        </button></li>      <li><p>DFP空間</p><select id="dfpDrop">     <!-- <option value="" selected disabled hidden>Choose DFP space</option> -->        </select></li>   <li><p>PPS版型：</p><select id="ppsDrop">     <!-- <option value="" selected disabled hidden>Choose PPS Layout</option> -->        </select></li>    <li><button id="confirmMapping" type="button" class="btn btn-primary">顯示</button></li>     </ul>  </div></div></body>><script src="public/index_append.js" charset="utf-8"></script>';
+
+// const topTag = '<script id="pps-script-11999" data-width="320" data-height="50" data-click-url="" data-cache-buster="" data-dsp-script="" src="https://tenmaxsgads.blob.core.windows.net/holder-stage/11999_ccb471cd-a98c-3262-8af0-4af97aec476d.js?cb=1574909888873"></script><ins class="ppstudio" data-pps-target-id="cr-11999"></ins><script async src="https://tenmaxsgads.blob.core.windows.net/code-stage/ppstudio-dev.js"></script>';
+// const googleConsoleMeta = '<meta name="google-site-verification" content="_KVbcXSdDrOFWWY0t6EqNWwLUX5E0S9imEIhCenUZYE"/></head>'
 
 // const bubbleStyleString = '<div class="chat_container" style="z-index:2147483647;"><div class="bubble"></div> <div class="chat"> <ul class="chat-thread"><button type="button" class="btn btn-primary">頁面上的 DFP 廣告空間數<span class="badge badge-light">9</span> <span class="sr-only">unread messages</span></button><li class="message-dest">Hi Codepen!</li> <li class="message-dest"><select class="custom-select"><option selected>DFP 廣告空間</option></select> </li> <li class="message-mit"></li></ul> </div> <div></body><script src="public/index_append.js" charset="utf-8"></script>';
 
@@ -30,16 +32,18 @@ app.get("/", function(req, res) {
   res.render("list", {
     prevSite: "Mockup site",
     preSiteUrl: "",
-    disabled:"disabled"
+    disabled:"disabled",
+    format:""
   });
   // res.sendFile(__dirname + "/index.html");
   // console.log(__dirname);
-
 });
 
 app.post("/", function(req, res) {
   // req.setTimeout(500000);
   var site = encodeURI(req.body.siteUrl);
+  var adTag = encodeURI(req.body.insertTag);
+  console.log(adTag);
   const dateTime = Date.now();
   console.log("/" + dateTime + "/index.html");
   const options = {
@@ -57,10 +61,12 @@ app.post("/", function(req, res) {
 
   scrape(options).then((result) => {
     var styleResult;
+    var jsReplace;
     var linkResult;
     console.log("scrape");
-    console.log(req.body.notBubble);
-    if (req.body.notBubble !== "true" && req.body.onTop !== "true") {
+    console.log(req.body.disableSelect);
+
+    if (req.body.disableSelect !== "true") {
       fs.readFile(__dirname + '/sites/' + dateTime + '/index.html', 'utf8', function(err, data) {
         if (err) {
           return console.log(err);
@@ -68,12 +74,63 @@ app.post("/", function(req, res) {
         console.log("process1");
 
         styleResult = data.replace('</body>', bubbleStyleString);
-        styleResult = styleResult.replace('</head>', googleConsoleMeta);
         styleResult = styleResult.replace('</head>', bubbleOutLink);
-        // var htmlResult = data.replace('<body>', bubbleHtml);
         fs.writeFile(__dirname + '/sites/' + dateTime + '/index.html', styleResult, 'utf8', function(err) {
           if (err) return console.log(err);
           console.log("process2");
+        });
+      });
+      fs.copyFile(__dirname + '/styles_append.css', __dirname + '/sites/' + dateTime + '/public/' + 'styles_append.css', (err) => {
+        if (err) throw err;
+        console.log('styles_append.css was copied to destination');
+      });
+      fs.copyFile(__dirname + '/append.html', __dirname + '/sites/' + dateTime + '/public/' + '/append.html', (err) => {
+        if (err) throw err;
+        console.log('append.html was copied to destination');
+      });
+    }
+
+    if (req.body.codeFormat === "js"){
+      fs.copyFile(__dirname + '/index_append.js', __dirname + '/sites/' + dateTime + '/public/' + 'index_append.js', (err) => {
+        if (err) throw err;
+        console.log('index_append.js was copied to destination');
+      });
+      fs.readFile(__dirname + '/sites/' + dateTime + '/public/' + 'append.html', 'utf8', function(err, data) {
+        if (err) {
+          return console.log(err);
+        }
+        console.log("process3");
+
+        jsReplace = data.replace('</body>', '</body><script type="text/javascript">' + decodeURI(adTag) + '</script>');
+
+        fs.writeFile(__dirname + '/sites/' + dateTime + '/public/' + 'append.html', jsReplace, 'utf8', function(err) {
+          if (err) return console.log(err);
+          console.log("process4");
+        });
+      });
+    } else if (req.body.codeFormat === "html"){
+
+    }
+
+
+
+
+
+
+    // if (req.body.disableSelect !== "true" && req.body.onTop !== "true") {
+    //   fs.readFile(__dirname + '/sites/' + dateTime + '/index.html', 'utf8', function(err, data) {
+    //     if (err) {
+    //       return console.log(err);
+    //     }
+    //     console.log("process1");
+    //
+    //     styleResult = data.replace('</body>', bubbleStyleString);
+        // styleResult = styleResult.replace('</head>', googleConsoleMeta);
+        // styleResult = styleResult.replace('</head>', bubbleOutLink);
+        // var htmlResult = data.replace('<body>', bubbleHtml);
+        // fs.writeFile(__dirname + '/sites/' + dateTime + '/index.html', styleResult, 'utf8', function(err) {
+        //   if (err) return console.log(err);
+        //   console.log("process2");
           // fs.writeFile(__dirname + '/sites/'+ dateTime + '/index.html', htmlResult, 'utf8', function (err) {
           //    if (err) return console.log(err);
           //    console.log("process2");
@@ -83,58 +140,64 @@ app.post("/", function(req, res) {
           //   console.log("process2");
           //
           // });
-        });
-      });
+      //   });
+      // });
 
       // fs.writeFileSync(__dirname + '/sites/' + dateTime + '/index.html', linkResult, 'utf8', function(err) {
       //   if (err) return console.log(err);
       //   console.log("process2");
       //
       // });
-      fs.copyFile(__dirname + '/styles_append.css', __dirname + '/sites/' + dateTime + '/public/' + 'styles_append.css', (err) => {
-        if (err) throw err;
-        console.log('styles_append.css was copied to destination');
-      });
-      fs.copyFile(__dirname + '/index_append.js', __dirname + '/sites/' + dateTime + '/public/' + 'index_append.js', (err) => {
-        if (err) throw err;
-        console.log('index_append.js was copied to destination');
-      });
+      // fs.copyFile(__dirname + '/styles_append.css', __dirname + '/sites/' + dateTime + '/public/' + 'styles_append.css', (err) => {
+      //   if (err) throw err;
+      //   console.log('styles_append.css was copied to destination');
+      // });
+      // fs.copyFile(__dirname + '/index_append.js', __dirname + '/sites/' + dateTime + '/public/' + 'index_append.js', (err) => {
+      //   if (err) throw err;
+      //   console.log('index_append.js was copied to destination');
+      // });
       //work
       // res.render("list", {
       //   prevSite: "Mockup site",
       //   preSiteUrl: "/" + dateTime + "/index.html"
       // });
-    } else if (req.body.onTop == "true") {
-      var topResult = "";
-      fs.readFile(__dirname + '/sites/' + dateTime + '/index.html', 'utf8', function(err, data) {
-        if (err) {
-          return console.log(err);
-        }
-        console.log("top_process1");
-
-        topResult = data.replace('</body>', topTag + '</body>');
-        fs.writeFile(__dirname + '/sites/' + dateTime + '/index.html', topResult, 'utf8', function(err) {
-          if (err) return console.log(err);
-          console.log("top_process2");
-        });
-      });
-    }
+    // }
+    // else if (req.body.onTop == "true") {
+    //   var topResult = "";
+    //   fs.readFile(__dirname + '/sites/' + dateTime + '/index.html', 'utf8', function(err, data) {
+    //     if (err) {
+    //       return console.log(err);
+    //     }
+    //     console.log("top_process1");
+    //
+    //     topResult = data.replace('</body>', topTag + '</body>');
+    //     fs.writeFile(__dirname + '/sites/' + dateTime + '/index.html', topResult, 'utf8', function(err) {
+    //       if (err) return console.log(err);
+    //       console.log("top_process2");
+    //     });
+    //   });
+    // }
 
   });
 
 
-
-
+  // var max = 9;
+  // var ranNum = Math.floor(Math.random() * Math.floor(max));
   res.render("list", {
     prevSite: "Mockup site",
-    preSiteUrl: "/" + dateTime + "/index.html",
-    disabled:""
+    // preSiteUrl: "/" + dateTime + ranNum,
+    preSiteUrl: "/" + dateTime,
+    disabled:"",
+    format:req.body.codeFormat
   });
 
   // res.render("list",{prevSite: __dirname + "/site/" + dateTime + "/index.html", preSiteUrl: "/" + dateTime + "/index.html"});
 });
 
-
+// app.get("/:siteId", function(req,res) {
+//   console.log(req.params.siteId.substr(0, req.params.siteId.length -1 ) + "/index.html");
+//   res.redirect("/" + req.params.siteId.substr(0, req.params.siteId.length -1 ) + "/index.html");
+// });
 
 // app.get("/:customSite", function(req, res) {
 //   // res.render(__dirname + '/sites/');
