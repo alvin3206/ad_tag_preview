@@ -8,6 +8,10 @@ iframe.adFrame {
 
 }
 
+.invisible {
+  display: none;
+}
+
 .chat_container {
   position: fixed;
   top: 0;

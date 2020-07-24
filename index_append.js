@@ -46,13 +46,15 @@ $(".bubble").on("click", function() {
         if ($("iframe[id*='google_ads_iframe_']").parent().hasClass("gpt_highlight")) {
           console.log("unhighlight");
           $("iframe[id*='google_ads_iframe_']:eq(" + g + ")").parent().removeClass("gpt_highlight");
+
         }
       }
-          // work!
-          var spaceWidth = $("iframe[id*='google_ads_iframe_']:eq(" + dfpNoResult + ")").attr("width");
-          var spaceHeight = $("iframe[id*='google_ads_iframe_']:eq(" + dfpNoResult + ")").attr("height");
-          $("iframe[id*='google_ads_iframe_']:eq(" + dfpNoResult + ")").parent().html("<iframe src='public/append.html' class='adFrame' width='" + spaceWidth + "' height=' " + spaceHeight + "'></iframe>");
-          $("iframe[id*='google_ads_iframe_']:eq(" + dfpNoResult + ")").parent().addClass("gpt_highlight");
+      // work!
+      var spaceWidth = $("iframe[id*='google_ads_iframe_']:eq(" + dfpNoResult + ")").attr("width");
+      var spaceHeight = $("iframe[id*='google_ads_iframe_']:eq(" + dfpNoResult + ")").attr("height");
+      $("iframe[id*='google_ads_iframe_']:eq(" + dfpNoResult + ")").parent().html("<iframe src='public/append.html' class='adFrame' id='google_ads_iframe_" + dfpNoResult + "' width='" + spaceWidth + "' height=' " + spaceHeight + "'></iframe><span class='spaceTag'> DFP Ad space " + dfpNoResult + "</span>");
+      // $("iframe[id*='google_ads_iframe_']:eq(" + dfpNoResult + ")").parent().addClass("gpt_highlight");
+      $(".spaceTag").addClass("invisible");
 
       document.querySelectorAll(".bubble, .ui-draggable ,.ui-draggable-handle")[0].click();
 
@@ -88,26 +90,19 @@ document.querySelectorAll(".bubble, .ui-draggable ,.ui-draggable-handle")[0].add
   gptNumber = $("iframe[id*='google_ads_iframe_']").length;
   console.log(gptNumber);
   document.querySelector("span.badge").innerHTML = gptNumber;
-
-  if (($("iframe[id*='google_ads_iframe_']").parent().hasClass("gpt_highlight")) && dfpAreaShow == false) {
-
-    console.log("no addClass");
-
-  } else if ($("iframe[id*='google_ads_iframe_']").parent().hasClass("gpt_highlight")) {
-
+  if (dfpAreaShow === true) {
     $("iframe[id*='google_ads_iframe_']").parent().addClass("gpt_highlight");
-    console.log("else if");
-
-  } else {
-    console.log("else");
-    $("iframe[id*='google_ads_iframe_']").parent().addClass("gpt_highlight");
-
-    for (var i = 0; i < gptNumber; i++) {
-
-      $("iframe[id*='google_ads_iframe_']:eq("+ i + ")").parent().append("DFP Ad space " + i);
-      $("#dfpDrop").append('<option value="' + i + '">' + 'Ad space ' + i + '</option>');
+    var tagAdd = $(".spaceTag")[0];
+    if (tagAdd) {
+      $(".spaceTag").removeClass("invisible");
+    } else {
+      for (var i = 0; i < gptNumber; i++) {
+        $("iframe[id*='google_ads_iframe_']:eq(" + i + ")").parent().append("<span class='spaceTag'> DFP Ad space " + i + "</span>");
+        $("#dfpDrop").append('<option value="' + i + '">' + 'Ad space ' + i + '</option>');
+        $("#dfpDrop option:eq(0)").attr("selected", "selected");
+      }
     }
-    $("#dfpDrop option:eq(0)").attr("selected","selected");
   }
+
   dfpAreaShow = true;
 });
