@@ -24,8 +24,11 @@ $(".bubble").on("click", function() {
     $('#dfpDrop').on('change', function() {
       var dfpDropNo = document.getElementById("dfpDrop");
       var dfpNoResult = dfpDropNo.options[dfpDropNo.selectedIndex].value;
-      var spaceHeight = $("[id*='div-gpt']:eq(" + dfpNoResult + ") div[id*='google_ads_iframe'] iframe").attr("height");
-      var spaceWidth = $("[id*='div-gpt']:eq(" + dfpNoResult + ") div[id*='google_ads_iframe'] iframe").attr("width");
+      // var spaceHeight = $("[id*='div-gpt']:eq(" + dfpNoResult + ") div[id*='google_ads_iframe'] iframe").attr("height");
+      // var spaceWidth = $("[id*='div-gpt']:eq(" + dfpNoResult + ") div[id*='google_ads_iframe'] iframe").attr("width");
+      var spaceWidth = $("iframe[id*='google_ads_iframe_']:eq(" + dfpNoResult + ")").attr("width");
+      var spaceHeight = $("iframe[id*='google_ads_iframe_']:eq(" + dfpNoResult + ")").attr("height");
+
       console.log(spaceHeight + "," + spaceWidth);
       $("#spaceSize").html(spaceWidth + "px * " + spaceHeight + "px");
     });
@@ -40,16 +43,16 @@ $(".bubble").on("click", function() {
       var dfpNoResult = dfpDropNo.options[dfpDropNo.selectedIndex].value;
 
       for (var g = 0; g < gptNumber; g++) {
-        if ($("[id*='div-gpt']").hasClass("gpt_highlight")) {
+        if ($("iframe[id*='google_ads_iframe_']").parent().hasClass("gpt_highlight")) {
           console.log("unhighlight");
-          $("[id*='div-gpt']:eq(" + g + ")").removeClass("gpt_highlight");
+          $("iframe[id*='google_ads_iframe_']:eq(" + g + ")").parent().removeClass("gpt_highlight");
         }
       }
           // work!
-          var spaceHeight = $("[id*='div-gpt']:eq(" + dfpNoResult + ") div[id*='google_ads_iframe'] iframe").attr("height");
-          var spaceWidth = $("[id*='div-gpt']:eq(" + dfpNoResult + ") div[id*='google_ads_iframe'] iframe").attr("width");
-          $("[id*='div-gpt']:eq(" + dfpNoResult + ") div[id*='google_ads_iframe']").html("<iframe src='public/append.html' class='adFrame' width='" + spaceWidth + "' height=' " + spaceHeight + "'></iframe>");
-          $("[id*='div-gpt']:eq(" + dfpNoResult + ")").addClass("gpt_highlight");
+          var spaceWidth = $("iframe[id*='google_ads_iframe_']:eq(" + dfpNoResult + ")").attr("width");
+          var spaceHeight = $("iframe[id*='google_ads_iframe_']:eq(" + dfpNoResult + ")").attr("height");
+          $("iframe[id*='google_ads_iframe_']:eq(" + dfpNoResult + ")").parent().html("<iframe src='public/append.html' class='adFrame' width='" + spaceWidth + "' height=' " + spaceHeight + "'></iframe>");
+          $("iframe[id*='google_ads_iframe_']:eq(" + dfpNoResult + ")").parent().addClass("gpt_highlight");
 
       document.querySelectorAll(".bubble, .ui-draggable ,.ui-draggable-handle")[0].click();
 
@@ -82,25 +85,26 @@ $(".bubble").mouseup(function(e) {
 });
 
 document.querySelectorAll(".bubble, .ui-draggable ,.ui-draggable-handle")[0].addEventListener("click", function() {
-  gptNumber = document.querySelectorAll("[id*='div-gpt']").length;
+  gptNumber = $("iframe[id*='google_ads_iframe_']").length;
   console.log(gptNumber);
   document.querySelector("span.badge").innerHTML = gptNumber;
 
-  if (($("[id*='div-gpt']").hasClass("gpt_highlight")) && dfpAreaShow == false) {
+  if (($("iframe[id*='google_ads_iframe_']").parent().hasClass("gpt_highlight")) && dfpAreaShow == false) {
 
     console.log("no addClass");
 
-  } else if (($("[id*='div-gpt']").hasClass("gpt_highlight"))) {
+  } else if ($("iframe[id*='google_ads_iframe_']").parent().hasClass("gpt_highlight")) {
 
-    $("[id*='div-gpt']").addClass("gpt_highlight");
+    $("iframe[id*='google_ads_iframe_']").parent().addClass("gpt_highlight");
+    console.log("else if");
 
   } else {
-
-    $("[id*='div-gpt']").addClass("gpt_highlight");
+    console.log("else");
+    $("iframe[id*='google_ads_iframe_']").parent().addClass("gpt_highlight");
 
     for (var i = 0; i < gptNumber; i++) {
 
-      document.querySelectorAll("[id*='div-gpt']")[i].append("DFP Ad space " + i);
+      $("iframe[id*='google_ads_iframe_']:eq("+ i + ")").parent().append("DFP Ad space " + i);
       $("#dfpDrop").append('<option value="' + i + '">' + 'Ad space ' + i + '</option>');
     }
     $("#dfpDrop option:eq(0)").attr("selected","selected");
