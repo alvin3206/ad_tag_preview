@@ -1,3 +1,5 @@
+//credit: Draggable Chat Heads By Dronca Raul on https://codepad.co/snippet/draggable-chat-heads-material-chat
+
 $(".bubble").draggable();
 var isMoving = false;
 var isdragging = false;
