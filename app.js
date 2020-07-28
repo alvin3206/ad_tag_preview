@@ -13,7 +13,7 @@ const bubbleStyleString = '<div class="chat_container" style="visibility:hidden;
 
 
 
-app.use(express.static(__dirname + '/sites'));
+// app.use(express.static(__dirname + '/sites'));
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({
   extended: true
@@ -22,6 +22,7 @@ app.use(bodyParser.urlencoded({
 
 
 app.get("/", function(req, res) {
+  app.use(express.static(__dirname + '/sites'));
   // 避免空白
   res.render("list", {
     prevSite: "Mockup site",
@@ -34,6 +35,7 @@ app.get("/", function(req, res) {
 });
 
 app.post("/", function(req, res) {
+  app.use(express.static(__dirname + '/sites'));
   // req.setTimeout(500000);
   var site = encodeURI(req.body.siteUrl);
   var adTag = encodeURI(req.body.insertTag);
@@ -41,21 +43,20 @@ app.post("/", function(req, res) {
   const dateTime = Date.now();
   console.log("/" + dateTime + "/index.html");
 
-  class MyPlugin {
-    apply(registerAction) {
-      registerAction('afterFinish', async () => {});
-    }
-  }
+  // class MyPlugin {
+  //   apply(registerAction) {
+  //     registerAction('afterFinish', async () => {});
+  //   }
+  // }
   const options = {
     urls: [site],
     directory: __dirname + '/sites/' + dateTime,
     subdirectories: [{
       directory: 'public',
-      extensions: ['.jpg', '.png', '.svg', '.js', '.css', '.gif'],
-      plugins: [new MyPlugin()]
+      extensions: ['.jpg', '.png', '.svg', '.js', '.css', '.gif']
+      // plugins: [new MyPlugin()]
     }, ],
   };
-  // const result = scrape(options);
   console.log("post");
 
 
@@ -131,6 +132,20 @@ app.post("/", function(req, res) {
       format: req.body.codeFormat
     });
   });
+});
+
+app.get("/:siteId/", function(req, res) {
+  if (Number(req.params.siteId)) {
+    app.use(express.static(__dirname + '/sites'));
+    var realSite = req.params.siteId;
+    console.log("site:" + realSite);
+    console.log("spaceId:" + req.query.spaceId);
+    if (req.query.spaceId) {
+      var spaceId = req.query.spaceId;
+    } else {
+      res.sendFile(__dirname + "/sites/" + req.params.siteId + "/index.html");
+    }
+  }
 });
 
 

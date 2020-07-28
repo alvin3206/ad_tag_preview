@@ -7,3 +7,11 @@ document.querySelector("#disableSelectOption").addEventListener("change", functi
     $(".disableLink").attr('disabled', 'disabled');
   }
 });
+
+
+document.querySelector("#start").addEventListener("click", function() {
+  console.log("test");
+  if (!$("#mock").hasClass('disabled')) {
+    $("#mock").addClass('disabled');
+  }
+});
