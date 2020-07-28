@@ -1,3 +1,5 @@
+Ad tag previewer: http://scrape.under-aged.ga/
+
 It's hard to take a screenshot of your company's advertisement on a specific website.
 Especially when your advertisement is limit to a few impressions per day.
 
