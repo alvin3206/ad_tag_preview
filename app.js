@@ -47,7 +47,7 @@ app.post("/", function(req, res) {
     directory: __dirname + '/sites/' + dateTime,
     subdirectories: [{
       directory: 'public',
-      extensions: ['.jpg', '.png', '.svg', '.js', '.css', '.gif',]
+      extensions: ['.jpg', '.png', '.svg', '.js', '.css', '.gif', ]
       // plugins: [new MyPlugin()]
     }, ],
   };
@@ -61,84 +61,85 @@ app.post("/", function(req, res) {
     console.log("scrape end");
     // console.log(req.body.disableSelect);
 
+
     fs.readFile(__dirname + '/sites/' + dateTime + '/index.html', 'utf8', function(err, data) {
       if (err) {
         return console.log(err);
       }
       console.log("GA tag insert process begin");
-      gaReplace = data.replace('</body>', gaTag);
+      gaReplace = data.replace('</head>', gaTag);
       fs.writeFile(__dirname + '/sites/' + dateTime + '/index.html', gaReplace, 'utf8', function(err) {
         if (err) return console.log(err);
         console.log("GA tag insert process end");
-      });
-    });
 
-    if (req.body.disableSelect !== "true") {
-      fs.readFile(__dirname + '/sites/' + dateTime + '/index.html', 'utf8', function(err, data) {
-        if (err) {
-          return console.log(err);
-        }
-        console.log("bubble replacement begin");
-
-        styleResult = data.replace('</body>', bubbleStyleString);
-        styleResult = styleResult.replace('</head>', bubbleOutLink);
-        fs.writeFile(__dirname + '/sites/' + dateTime + '/index.html', styleResult, 'utf8', function(err) {
-          if (err) return console.log(err);
-          console.log("bubble replacement end");
-        });
-      });
-      fs.copyFile(__dirname + '/styles_append.css', __dirname + '/sites/' + dateTime + '/public/' + 'styles_append.css', (err) => {
-        if (err) throw err;
-        console.log('styles_append.css was copied to destination');
-      });
-      fs.copyFile(__dirname + '/append.html', __dirname + '/sites/' + dateTime + '/public/' + '/append.html', (err) => {
-        if (err) throw err;
-        console.log('append.html was copied to destination');
-      });
-      fs.copyFile(__dirname + '/index_append.js', __dirname + '/sites/' + dateTime + '/public/' + 'index_append.js', (err) => {
-        if (err) throw err;
-        console.log('index_append.js was copied to destination');
-      });
-    }
-
-    if (req.body.codeFormat === "js") {
-      fs.readFile(__dirname + '/sites/' + dateTime + '/public/' + 'append.html', 'utf8', function(err, data) {
-        if (err) {
-          return console.log(err);
-        }
-        console.log("append.html (iframe, js) modification begin");
-
-        jsReplace = data.replace('</body>', '</body><script type="text/javascript">' + decodeURI(adTag) + '</script>');
-
-        fs.writeFile(__dirname + '/sites/' + dateTime + '/public/' + 'append.html', jsReplace, 'utf8', function(err) {
-          if (err) return console.log(err);
-          console.log("append.html (iframe, js) modification end");
-        });
-      });
-    } else if (req.body.codeFormat === "html") {
-      fs.readFile(__dirname + '/sites/' + dateTime + '/public/' + 'append.html', 'utf8', function(err, data) {
-        if (err) {
-          return console.log(err);
-        }
-        console.log("append.html (iframe, html) modification begin");
-
-        jsReplace = data.replace('<body>', '<body>' + decodeURI(adTag));
-
-        fs.writeFile(__dirname + '/sites/' + dateTime + '/public/' + 'append.html', jsReplace, 'utf8', function(err) {
-          if (err) return console.log(err);
-          console.log("append.html (iframe, html) modification end");
-        });
-      });
-    }
-    fs.readdir(__dirname + '/sites/' + dateTime , {withFileTypes: true}, function(err, files) {
-      for (let i = 0; i < files.length; i++) {
-        if ((files[i].search(".html") >= 0) && (files[i].search("index.html") === -1)) {
-          fs.unlink(__dirname + '/sites/' + dateTime + "/" + files[i], function(err) {
-            console.log("unlink: " + files[i]);
+        if (req.body.disableSelect !== "true") {
+          fs.readFile(__dirname + '/sites/' + dateTime + '/index.html', 'utf8', function(err, data) {
+            if (err) {
+              return console.log(err);
+            }
+            console.log("bubble replacement begin");
+            styleResult = data.replace('</body>', bubbleStyleString);
+            styleResult = styleResult.replace('</head>', bubbleOutLink);
+            fs.writeFile(__dirname + '/sites/' + dateTime + '/index.html', styleResult, 'utf8', function(err) {
+              if (err) return console.log(err);
+              console.log("bubble replacement end");
+            });
+          });
+          fs.copyFile(__dirname + '/styles_append.css', __dirname + '/sites/' + dateTime + '/public/' + 'styles_append.css', (err) => {
+            if (err) throw err;
+            console.log('styles_append.css was copied to destination');
+          });
+          fs.copyFile(__dirname + '/append.html', __dirname + '/sites/' + dateTime + '/public/' + '/append.html', (err) => {
+            if (err) throw err;
+            console.log('append.html was copied to destination');
+          });
+          fs.copyFile(__dirname + '/index_append.js', __dirname + '/sites/' + dateTime + '/public/' + 'index_append.js', (err) => {
+            if (err) throw err;
+            console.log('index_append.js was copied to destination');
           });
         }
-      }
+
+        if (req.body.codeFormat === "js") {
+          fs.readFile(__dirname + '/sites/' + dateTime + '/public/' + 'append.html', 'utf8', function(err, data) {
+            if (err) {
+              return console.log(err);
+            }
+            console.log("append.html (iframe, js) modification begin");
+
+            jsReplace = data.replace('</body>', '</body><script type="text/javascript">' + decodeURI(adTag) + '</script>');
+
+            fs.writeFile(__dirname + '/sites/' + dateTime + '/public/' + 'append.html', jsReplace, 'utf8', function(err) {
+              if (err) return console.log(err);
+              console.log("append.html (iframe, js) modification end");
+            });
+          });
+        } else if (req.body.codeFormat === "html") {
+          fs.readFile(__dirname + '/sites/' + dateTime + '/public/' + 'append.html', 'utf8', function(err, data) {
+            if (err) {
+              return console.log(err);
+            }
+            console.log("append.html (iframe, html) modification begin");
+
+            jsReplace = data.replace('<body>', '<body>' + decodeURI(adTag));
+
+            fs.writeFile(__dirname + '/sites/' + dateTime + '/public/' + 'append.html', jsReplace, 'utf8', function(err) {
+              if (err) return console.log(err);
+              console.log("append.html (iframe, html) modification end");
+            });
+          });
+        }
+        // fs.readdir(__dirname + '/sites/' + dateTime , {withFileTypes: true}, function(err, files) {
+        //   for (let i = 0; i < files.length; i++) {
+        //     if ((files[i].search(".html") >= 0) && (files[i].search("index.html") === -1)) {
+        //       fs.unlink(__dirname + '/sites/' + dateTime + "/" + files[i], function(err) {
+        //         console.log("unlink: " + files[i]);
+        //       });
+        //     }
+        //   }
+        // });
+      });
     });
+
     res.render("list", {
       prevSite: "Mockup site",
       preSiteUrl: "/" + dateTime,
