@@ -10,7 +10,7 @@ const gaTag = "<script>window.dataLayer = window.dataLayer || [];function gtag()
 const bubbleOutLink = '<link rel="stylesheet" href="public/styles_append.css"></head><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script><script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>';
 const bubbleStyleString = '<div class="chat_container" style="visibility:hidden;z-index:100000">  <div class="bubble" style="visibility:visible"></div>  <div class="chat" style="visibility:visible">    <ul class="chat-thread">      <li><h5>          How many DFP Ad spaces on this page:          <span class="badge badge-pill badge-warning">9</span>        </h5></li>      <li><p>Replace DFP ad space:</p><select id="dfpDrop">     <!-- <option value="" selected disabled hidden>Choose DFP space</option> -->        </select></li><li><p>Ad Space Size</p><p id="spaceSize"></p></li>    <li><button id="confirmMapping" type="button" class="btn btn-primary">Replace with your tag</button></li>     </ul>  </div></div></body><script src="public/index_append.js" charset="utf-8"></script>';
 
-// app.use(express.static(__dirname + '/sites'));
+app.use(express.static(__dirname + '/sites'));
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({
   extended: true
@@ -47,7 +47,7 @@ app.post("/", function(req, res) {
     directory: __dirname + '/sites/' + dateTime,
     subdirectories: [{
       directory: 'public',
-      extensions: ['.jpg', '.png', '.svg', '.js', '.css', '.gif']
+      extensions: ['.jpg', '.png', '.svg', '.js', '.css', '.gif',]
       // plugins: [new MyPlugin()]
     }, ],
   };
@@ -60,6 +60,7 @@ app.post("/", function(req, res) {
     var gaReplace;
     console.log("scrape end");
     // console.log(req.body.disableSelect);
+
     fs.readFile(__dirname + '/sites/' + dateTime + '/index.html', 'utf8', function(err, data) {
       if (err) {
         return console.log(err);
@@ -129,6 +130,15 @@ app.post("/", function(req, res) {
         });
       });
     }
+    fs.readdir(__dirname + '/sites/' + dateTime , {withFileTypes: true}, function(err, files) {
+      for (let i = 0; i < files.length; i++) {
+        if ((files[i].search(".html") >= 0) && (files[i].search("index.html") === -1)) {
+          fs.unlink(__dirname + '/sites/' + dateTime + "/" + files[i], function(err) {
+            console.log("unlink: " + files[i]);
+          });
+        }
+      }
+    });
     res.render("list", {
       prevSite: "Mockup site",
       preSiteUrl: "/" + dateTime,
@@ -138,19 +148,20 @@ app.post("/", function(req, res) {
   });
 });
 
-app.get("/:siteId/", function(req, res) {
-  if (Number(req.params.siteId)) {
-    app.use(express.static(__dirname + '/sites'));
-    var realSite = req.params.siteId;
-    console.log("site:" + realSite);
-    console.log("spaceId:" + req.query.spaceId);
-    if (req.query.spaceId) {
-      var spaceId = req.query.spaceId;
-    } else {
-      res.sendFile(__dirname + "/sites/" + req.params.siteId + "/index.html");
-    }
-  }
-});
+// app.get("/:siteId", function(req, res) {
+//   var realSite = req.params.siteId;
+//   app.use(express.static(__dirname + '/sites/' + realSite + "/"));
+//   console.log("site:" + realSite);
+//   console.log(Number(req.params.siteId));
+//   if (Number(req.params.siteId)) {
+//
+//     if (req.query.spaceId) {
+//       var spaceId = req.query.spaceId;
+//     } else {
+//       res.sendFile(__dirname + "/sites/" + req.params.siteId + "/index.html");
+//     }
+//   }
+// });
 
 app.listen(process.env.PORT || 3000, function() {
   console.log("server started running on port 3000!");
