@@ -4,6 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const scrape = require('website-scraper');
 const fs = require('fs');
+// const request = require('request');
 
 const app = express();
 const gaTag = "<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-132057673-2');</script></head>";
@@ -30,10 +31,16 @@ app.get("/", function(req, res) {
 });
 
 app.post("/", function(req, res) {
+  // console.log(req.body['g-recaptcha-response']);
   app.use(express.static(__dirname + '/sites'));
   // req.setTimeout(500000);
+  console.log(req.body);
   var site = encodeURI(req.body.siteUrl);
-  var adTag = encodeURI(req.body.insertTag);
+  var adTag;
+  if (req.body.disableSelect !== "true") {
+    adTag = encodeURI(req.body.insertTag);
+  }
+
   // console.log(adTag);
   const dateTime = Date.now();
   // console.log("/" + dateTime + "/index.html");
@@ -96,38 +103,40 @@ app.post("/", function(req, res) {
           fs.copyFile(__dirname + '/index_append.js', __dirname + '/sites/' + dateTime + '/public/' + 'index_append.js', (err) => {
             if (err) throw err;
             console.log('index_append.js was copied to destination');
+
+            if (req.body.codeFormat === "js") {
+              fs.readFile(__dirname + '/sites/' + dateTime + '/public/' + 'append.html', 'utf8', function(err, data) {
+                if (err) {
+                  return console.log(err);
+                }
+                console.log("append.html (iframe, js) modification begin");
+
+                jsReplace = data.replace('</body>', '</body><script type="text/javascript">' + decodeURI(adTag) + '</script>');
+
+                fs.writeFile(__dirname + '/sites/' + dateTime + '/public/' + 'append.html', jsReplace, 'utf8', function(err) {
+                  if (err) return console.log(err);
+                  console.log("append.html (iframe, js) modification end");
+                });
+              });
+            } else if (req.body.codeFormat === "html") {
+              fs.readFile(__dirname + '/sites/' + dateTime + '/public/' + 'append.html', 'utf8', function(err, data) {
+                if (err) {
+                  return console.log(err);
+                }
+                console.log("append.html (iframe, html) modification begin");
+
+                jsReplace = data.replace('<body>', '<body>' + decodeURI(adTag));
+
+                fs.writeFile(__dirname + '/sites/' + dateTime + '/public/' + 'append.html', jsReplace, 'utf8', function(err) {
+                  if (err) return console.log(err);
+                  console.log("append.html (iframe, html) modification end");
+                });
+              });
+            }
           });
         }
 
-        if (req.body.codeFormat === "js") {
-          fs.readFile(__dirname + '/sites/' + dateTime + '/public/' + 'append.html', 'utf8', function(err, data) {
-            if (err) {
-              return console.log(err);
-            }
-            console.log("append.html (iframe, js) modification begin");
 
-            jsReplace = data.replace('</body>', '</body><script type="text/javascript">' + decodeURI(adTag) + '</script>');
-
-            fs.writeFile(__dirname + '/sites/' + dateTime + '/public/' + 'append.html', jsReplace, 'utf8', function(err) {
-              if (err) return console.log(err);
-              console.log("append.html (iframe, js) modification end");
-            });
-          });
-        } else if (req.body.codeFormat === "html") {
-          fs.readFile(__dirname + '/sites/' + dateTime + '/public/' + 'append.html', 'utf8', function(err, data) {
-            if (err) {
-              return console.log(err);
-            }
-            console.log("append.html (iframe, html) modification begin");
-
-            jsReplace = data.replace('<body>', '<body>' + decodeURI(adTag));
-
-            fs.writeFile(__dirname + '/sites/' + dateTime + '/public/' + 'append.html', jsReplace, 'utf8', function(err) {
-              if (err) return console.log(err);
-              console.log("append.html (iframe, html) modification end");
-            });
-          });
-        }
         // fs.readdir(__dirname + '/sites/' + dateTime , {withFileTypes: true}, function(err, files) {
         //   for (let i = 0; i < files.length; i++) {
         //     if ((files[i].search(".html") >= 0) && (files[i].search("index.html") === -1)) {
