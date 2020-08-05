@@ -5,3 +5,13 @@
 .optional {
   font-size: 0.8rem;
 }
+
+.toast-position {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.footer-cotribute {
+  font-size: 0.8rem
+}
